@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Serializacion;
 
 import Estructura.ArbolBB;
@@ -17,10 +13,6 @@ import java.io.PrintWriter;
 import reserva.varios.Estudiante;
 import reserva.varios.Persona;
 
-/**
- *
- * @author Gortuz
- */
 public class Serializador {
     final private Gson gson;
     private File archivo;

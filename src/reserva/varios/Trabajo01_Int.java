@@ -4,6 +4,8 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import Estructura.*;
 import Serializacion.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Trabajo01_Int extends javax.swing.JFrame {
 
@@ -23,15 +25,58 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     //MÉTODOS PARA TODOS LOS BOTONES SEGÚN SU FUNCIONALIDAD
     //-------------------------------------------------------
     //PARTE DE INGRESO DE ESTUDIANTES EN EL FORMULARIO
+    //MÉTODO PARA VALIDAR UNA CÉDULA
+    public boolean cedulaValida(String cedula) {
+        if (cedula == null || cedula.length() != 10) {
+            return false;
+        }
+        int total = 0;
+        int digitoVerificador = Integer.parseInt(cedula.substring(9));
+        int[] coeficientes = {2, 1, 2, 1, 2, 1, 2, 1, 2};
+
+        for (int i = 0; i < coeficientes.length; i++) {
+            int val = Integer.parseInt(cedula.substring(i, i + 1)) * coeficientes[i];
+            total += val > 9 ? val - 9 : val;
+        }
+        int verificadorObtenido = total % 10 == 0 ? 0 : 10 - total % 10;
+        return digitoVerificador == verificadorObtenido;
+    }
+
+    //MÉTODO PARA VALIDAR EL NOMBRE Y APELLIDO
+    public boolean nombreApellidoValido(String input) {
+        // Compile the regex pattern
+        Pattern pattern = Pattern.compile("^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*$");
+        // Create a matcher object from the input string
+        Matcher matcher = pattern.matcher(input);
+        // Return true if the input matches the pattern, false otherwise
+        return matcher.matches();
+    }
+
     //Metodo para ingreso de estudiantes
     public void ingresarEstudiante() {
-        String nombre = txtNombreRegEst.getText();
-        String apellido = txtApellidoRegEst.getText();
-        String cedula = txtCedulaRegEst.getText();
+        String nombre = null;
+        String apellido = null;
+
         String carrera = (String) comboBoxCarreraRegEst.getSelectedItem();
         int nivel = Integer.parseInt((String) comboBoxNivelRegEst.getSelectedItem());
 
         try {
+            if (nombreApellidoValido(txtNombreRegEst.getText())) {
+                nombre = txtNombreRegEst.getText();
+            } else {
+                throw new NullPointerException("nombreInv");
+            }
+            if (nombreApellidoValido(txtApellidoRegEst.getText())) {
+                apellido = txtApellidoRegEst.getText();
+            } else {
+                throw new NullPointerException("apellidoInv");
+            }
+            String cedula = null;
+            if (cedulaValida(txtCedulaRegEst.getText())) {
+                cedula = txtCedulaRegEst.getText();
+            } else {
+                throw new NullPointerException("cedulaInv");
+            }
             int dia = Integer.parseInt(txtDiaRegEst.getText());
             int mes = Integer.parseInt(txtMesRegEst.getText());
             int año = Integer.parseInt(txtAñoRegEst.getText());
@@ -49,7 +94,21 @@ public class Trabajo01_Int extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Estudiante Registrado Correctamente");
 
             txtAreaRegEst.setText("Estudiante Registrado:\n" + e);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor registre números en la fecha de nacimiento");
+        } catch (NullPointerException e) {
+            switch (e.getMessage()) {
+                case "nombreInv":
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese un nombre válido");
+                    break;
+                case "apellidoInv":
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese un apellido válido");
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Por favor registre un número de cédula válido");
+            }
+
+        } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(null, "Por favor registre una fecha de nacimiento válida");
         }
     }
@@ -103,7 +162,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
             try {
                 //Guarda la información antigua para ser mostrada después
                 Estudiante e = (Estudiante) listaEstudiantes.Busqueda(cedula).getInfo();
-                String oldData = "Datos antiguos:\n" + e.toString()+"\n";
+                String oldData = "Datos antiguos:\n" + e.toString() + "\n";
                 //Aqui se asignan los nuevos valores
                 String nombre = txtNombreRegEst.getText();
                 String apellido = txtApellidoRegEst.getText();
@@ -120,8 +179,8 @@ public class Trabajo01_Int extends javax.swing.JFrame {
                 e.setNivel(nivel);
                 e.setEdad(fn);
                 //Muestra los datos modificados
-                String newData  = "---------------------------------------------------\n"+"Datos modificados:\n"+e.toString();
-                String pantalla = oldData+newData;
+                String newData = "---------------------------------------------------\n" + "Datos modificados:\n" + e.toString();
+                String pantalla = oldData + newData;
                 txtAreaRegEst.setText(pantalla);
             } catch (Exception e) {
                 txtAreaRegEst.setText("Ningún Estudiante encontrado, o datos mal ingresados en modificación");

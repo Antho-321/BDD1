@@ -18,6 +18,28 @@ public class Fecha {
         this.mes = date.getMonthValue();
         this.año = date.getYear();
     }
+    /**
+     * Método constructor que crea un objeto fecha con atributos: día, mes y año
+     * que se introducen como parámetros
+     *
+     * @param día
+     * @param mes
+     * @param año
+     */
+    public Fecha(int día, int mes, int año) {
+        if (mes>=1&&mes<=12) {
+            this.mes = mes;
+        }
+        if (día>=1&&día<=this.DíasMes()) {
+            this.día = día;
+        }
+        if (año>0) {
+            this.año = año;
+        }  
+        if(!(mes>=1&&mes<=12)||!(día>=1&&día<=this.DíasMes())||!(año>0)){
+            throw new IllegalArgumentException();
+        }
+    }
 
     /**
      * Este método retorna true si el año del objeto es bisiesto y false en el
@@ -55,25 +77,6 @@ public class Fecha {
                 return 31;
             }
         }
-    }
-    /**
-     * Método constructor que crea un objeto fecha con atributos: día, mes y año
-     * que se introducen como parámetros
-     *
-     * @param día
-     * @param mes
-     * @param año
-     */
-    public Fecha(int día, int mes, int año) {
-        if (mes>=1&&mes<=12) {
-            this.mes = mes;
-        }    
-        if (día>=1&&día<=this.DíasMes()) {
-            this.día = día;
-        }
-        if (año>0) {
-            this.año = año;
-        }        
     }
 
     /**
