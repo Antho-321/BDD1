@@ -123,7 +123,20 @@ public class ArbolBB implements Serializable {
         }
         return res;
     }
-
+    
+    //INORDER para libros
+     public String Inorderl(NodoABB r) {
+        String res = "";
+        Libro libro;
+        if (r != null) {
+            res += Inorder(r.gethIzq());
+            libro = (Libro) r.getInfo();
+            res += libro.toString() + "\n";
+            res += Inorder(r.gethDer());
+        }
+        return res;
+    }
+    
     //POSORDER
     public String Posorder(NodoABB r) {
         String res = "";
@@ -314,6 +327,73 @@ public class ArbolBB implements Serializable {
         }
     }
 
+    
+    
+     //Metodo para Eliminar liibro
+    public void EliminarNodol(String id, NodoABB raiz, NodoABB aux) {
+        if (aux == null) {
+            return;
+        }
+        if (raiz == aux && aux.gethIzq() == null && aux.gethDer() == null) {
+            this.raiz = null;
+        }
+        int flag = Comparar(id, aux);
+
+        if (flag < 0) {
+            raiz = aux;
+            aux = aux.gethIzq();
+            EliminarNodo(id, raiz, aux);
+        } else if (flag > 0) {
+            raiz = aux;
+            aux = aux.gethDer();
+            EliminarNodo(id, raiz, aux);
+        } else {
+            boolean hoja = aux.gethIzq() == null && aux.gethDer() == null;
+            if (hoja) {//caso 1
+                if (raiz.gethIzq() == aux) {
+                    raiz.sethIzq(null);
+                } else {
+                    raiz.sethDer(null);
+                }
+            } else {
+                if (aux.gethIzq() != null && aux.gethDer() != null) {//caso 2
+                    NodoABB info = MenorDeMayores(aux.gethDer());//siempre va a ser hoja
+                    EliminarNodo(((Libro) info.getInfo()).getCodigo(), aux, aux);//elimina el nodo repetido
+                    aux.setInfo(info.getInfo());
+                } else {
+                    if (this.raiz != aux) {//caso 3
+                        if (aux.gethIzq() != null) {
+                            //Por cual enlace entra aux
+                            if (raiz.gethIzq() == aux) {
+                                raiz.sethIzq(aux.gethIzq());
+                            } else {
+                                raiz.sethDer(aux.gethIzq());
+                            }
+                        } else {
+                            //Por donde entra
+                            System.out.println("aa");
+                            if (raiz.gethIzq() == aux) {
+                                raiz.sethIzq(aux.gethDer());
+                            } else {
+                                raiz.sethDer(aux.gethDer());
+                            }
+                        }
+                    } else {
+                        //Caso especial cuando la raiz tiene una rama
+                        if (aux.gethIzq() != null) {
+                            this.raiz = aux.gethIzq();
+                        } else {
+                            this.raiz = aux.gethDer();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    
+    
+    
     //Retornar nodo
     public NodoABB retornarNododePersona(String cedula) {
         profundidad = 0;
