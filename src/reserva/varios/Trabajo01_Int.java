@@ -192,6 +192,11 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         }
     }
 
+    //PARTE DE INGRESO DE LIBROS EN EL FORMULARIO
+    public void ingresarLibro(){
+        
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

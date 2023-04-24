@@ -6,8 +6,7 @@ package Estructura;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import reserva.varios.Estudiante;
-import reserva.varios.Fecha;
+import reserva.varios.*;
 
 /**
  *
@@ -40,9 +39,8 @@ public class ArbolBB implements Serializable {
         this.raiz = null;
     }
 
-//    //Metodo ingresar nodo
+    //Metodo ingresar nodo
     public void Ingresar(Estudiante p) {
-//        Persona infoPersona = (Persona)raiz.getInfo();
         NodoABB nuevo = new NodoABB(p);
 
         if (this.raiz == null) {
@@ -70,6 +68,36 @@ public class ArbolBB implements Serializable {
         }
     }
 
+    //METODO PARA INGRESAR UN LIBRO 
+    public void Ingresar(Libro p) {
+        NodoABB nuevo = new NodoABB(p);
+
+        if (this.raiz == null) {
+            this.raiz = nuevo;
+        } else {
+            NodoABB aux = raiz;
+            while (aux != null) {
+                int bandera = (((Libro) aux.getInfo()).getCodigo().compareTo(p.getCodigo()));
+                if (bandera < 0) {
+                    if (aux.gethDer() == null) {
+                        aux.sethDer(nuevo);
+                        break;
+                    }
+                    aux = aux.gethDer();
+                } else if (bandera > 0) {
+                    if (aux.gethIzq() == null) {
+                        aux.sethIzq(nuevo);
+                        break;
+                    }
+                    aux = aux.gethIzq();
+                } else {
+                    break;
+                }
+            }
+        }
+    }
+    
+    
     //PREORDER
     public String Preorder(NodoABB r) {
         String res = "";
@@ -142,9 +170,36 @@ public class ArbolBB implements Serializable {
             }
         }
     }
-
+    
     public NodoABB Busqueda(String ced) {
         return Busqueda(ced, this.raiz);
+    }
+
+    //METODO PARA BUSQUEDA EN LIBROS
+    public String getCodigo(NodoABB nodo) {
+        return ((Libro) nodo.getInfo()).getCodigo();
+    }
+    
+    public NodoABB Busquedal(String cod, NodoABB nodo) {
+        String s = "";
+        if (nodo == null) {
+            return null;
+        }
+        s = getCodigo(nodo);
+
+        if (cod.equals(s)) {
+            return nodo;
+        } else {
+            if (s.compareTo(cod) < 0) {
+                return Busqueda(cod, nodo.gethDer());
+            } else {
+                return Busqueda(cod, nodo.gethIzq());
+            }
+        }
+    }
+    
+    public NodoABB Busquedal(String cod) {
+        return Busquedal(cod, this.raiz);
     }
 
     //MÉTODO PARA ALTURA
