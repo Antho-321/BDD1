@@ -129,10 +129,10 @@ public class ArbolBB implements Serializable {
         String res = "";
         Libro libro;
         if (r != null) {
-            res += Inorder(r.gethIzq());
+            res += Inorderl(r.gethIzq());
             libro = (Libro) r.getInfo();
             res += libro.toString() + "\n";
-            res += Inorder(r.gethDer());
+            res += Inorderl(r.gethDer());
         }
         return res;
     }
@@ -337,7 +337,7 @@ public class ArbolBB implements Serializable {
         if (raiz == aux && aux.gethIzq() == null && aux.gethDer() == null) {
             this.raiz = null;
         }
-        int flag = Comparar(id, aux);
+        int flag = Compararl(id, aux);
 
         if (flag < 0) {
             raiz = aux;
@@ -442,7 +442,10 @@ public class ArbolBB implements Serializable {
     public int Comparar(String id, NodoABB A) {
         return id.compareTo(((Estudiante) A.getInfo()).getCedula());
     }
-
+    //Método para comparar Libro
+    public int Compararl(String id, NodoABB A) {
+        return id.compareTo(((Libro) A.getInfo()).getCodigo());
+    }
     //Métodos para generar el .text
     public ListaLineal Niveles(ListaLineal lista){
         lista.Clear();
