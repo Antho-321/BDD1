@@ -1,23 +1,12 @@
 package reserva.varios;
-import java.time.LocalDate;
 
 
 public class Fecha {
     private int día;
     private int mes;
     private int año;
-    LocalDate date = LocalDate.now();
     
 
-    /**
-     * Método constructor que crea un objeto fecha con atributos: día, mes y año
-     * actuales
-     */
-    public Fecha() {      
-        this.día = date.getDayOfMonth();
-        this.mes = date.getMonthValue();
-        this.año = date.getYear();
-    }
     /**
      * Método constructor que crea un objeto fecha con atributos: día, mes y año
      * que se introducen como parámetros
@@ -216,9 +205,6 @@ public class Fecha {
      * segunda
      * @return 
      */
-    public int Comparar() {
-        return Comparar(date.getDayOfMonth(),date.getMonthValue(),date.getYear());
-    }
     public int Comparar(Fecha f){
         return Comparar(f.día,f.mes,f.año);
     }
@@ -242,6 +228,7 @@ public class Fecha {
             this.año = año2;
         }   
     }
+    /*
     public String Edad(int día, int mes, int año){
         Fecha aux;
         aux=new Fecha();
@@ -271,5 +258,5 @@ public class Fecha {
     }
     public String Edad(){
         return Edad(date.getDayOfMonth(),date.getMonthValue(),date.getYear());
-    }
+    }*/
 }
