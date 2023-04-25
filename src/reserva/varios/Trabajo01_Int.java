@@ -428,11 +428,16 @@ public class Trabajo01_Int extends javax.swing.JFrame {
             Estudiante e = (Estudiante) listaEstudiantes.Busqueda(cedula).getInfo();
             return ("_______________________________________________________________________"
                     + "\nLista de libros registrados:\n" + e.getLibrosEstudiante().Inorderl(e.getLibrosEstudiante().getRaiz()));
-            
+
         } catch (Exception e) {
-            
+
         }
         return "";
+    }
+
+    //Metodo que muestra los libros por categoría
+    public void reporteLibrosParametrico(String Categoría) {
+        txtAreaResLibro.setText("Lista de libros registrados:\n" + listaLibros.InorderParametric(listaLibros.getRaiz(), Categoría));
     }
 
     @SuppressWarnings("unchecked")
@@ -505,7 +510,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtAreaDatosEstudianteResLibro = new javax.swing.JTextArea();
         btnVerificarEstudianteResLibro = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboxCatLibro = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtAreaDatosLibrosResLibro = new javax.swing.JTextArea();
         btnDevolverLibroResLibro = new javax.swing.JButton();
@@ -751,13 +756,18 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         });
         jPanel3.add(btnVerificarEstudianteResLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 160, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mostrar Todos", "Romance", "Ficción", "Comedia", "Ciencia", "Drama" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+        cboxCatLibro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mostrar Todos", "Romance", "Ficción", "Comedia", "Ciencia", "Drama" }));
+        cboxCatLibro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboxCatLibroItemStateChanged(evt);
             }
         });
-        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, -1, -1));
+        cboxCatLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboxCatLibroActionPerformed(evt);
+            }
+        });
+        jPanel3.add(cboxCatLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, -1, -1));
 
         txtAreaDatosLibrosResLibro.setColumns(20);
         txtAreaDatosLibrosResLibro.setRows(5);
@@ -813,8 +823,8 @@ public class Trabajo01_Int extends javax.swing.JFrame {
 
     private void btnVerificarEstudianteResLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarEstudianteResLibroActionPerformed
         // TODO add your handling code here:
-        String librosEstudiante =listaLibrosEstudiante();
-        txtAreaDatosEstudianteResLibro.setText(verificarEstudiantes(txtCedulaResLibro.getText())+librosEstudiante);
+        String librosEstudiante = listaLibrosEstudiante();
+        txtAreaDatosEstudianteResLibro.setText(verificarEstudiantes(txtCedulaResLibro.getText()) + librosEstudiante);
 
     }//GEN-LAST:event_btnVerificarEstudianteResLibroActionPerformed
 
@@ -878,9 +888,33 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         devolver();
     }//GEN-LAST:event_btnDevolverLibroResLibroActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cboxCatLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxCatLibroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cboxCatLibroActionPerformed
+
+    private void cboxCatLibroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxCatLibroItemStateChanged
+        // TODO add your handling code here:
+
+        String item = (String) cboxCatLibro.getSelectedItem(); // get the selected item as an Object
+        reporteLibrosParametrico(item);
+        switch (item) {
+            case "Romance":
+                reporteLibrosParametrico("Romance");
+                break;
+            case "Ficción":
+                reporteLibrosParametrico("Ficción");
+                break;
+            case "Comedia":
+                reporteLibrosParametrico("Comedia");
+                break;
+            case "Ciencia":
+                reporteLibrosParametrico("Ciencia");
+                break;
+            case "Drama":
+                reporteLibrosParametrico("Drama");
+                break;
+        }
+    }//GEN-LAST:event_cboxCatLibroItemStateChanged
 
     public static void main(String args[]) {
 
@@ -906,12 +940,12 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     private javax.swing.JButton btnVerificarEstudianteRegEst;
     private javax.swing.JButton btnVerificarEstudianteResLibro;
     private javax.swing.JButton btnVerificarLibroRegLibro;
+    private javax.swing.JComboBox<String> cboxCatLibro;
     private javax.swing.JComboBox<String> comboBoxCantidadLibrosResLibro;
     private javax.swing.JComboBox<String> comboBoxCarreraRegEst;
     private javax.swing.JComboBox<String> comboBoxCategoriaRegLibro;
     private javax.swing.JComboBox<String> comboBoxMateriaRegLibro;
     private javax.swing.JComboBox<String> comboBoxNivelRegEst;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

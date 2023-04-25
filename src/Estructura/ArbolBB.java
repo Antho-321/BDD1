@@ -96,8 +96,7 @@ public class ArbolBB implements Serializable {
             }
         }
     }
-    
-    
+
     //PREORDER
     public String Preorder(NodoABB r) {
         String res = "";
@@ -123,9 +122,9 @@ public class ArbolBB implements Serializable {
         }
         return res;
     }
-    
+
     //INORDER para libros
-     public String Inorderl(NodoABB r) {
+    public String Inorderl(NodoABB r) {
         String res = "";
         Libro libro;
         if (r != null) {
@@ -136,7 +135,22 @@ public class ArbolBB implements Serializable {
         }
         return res;
     }
-    
+    //INORDER para libros parametrizado
+
+    public String InorderParametric(NodoABB r, String Categoria) {
+        String res = "";
+        Libro libro;
+        if (r != null) {
+            res += Inorderl(r.gethIzq());
+            libro = (Libro) r.getInfo();
+            if (libro.getCategoria().equals(Categoria)||Categoria.equals("Mostrar Todos")) {
+                 res += libro.toString() + "\n";
+            }
+            res += Inorderl(r.gethDer());
+        }
+        return res;
+    }
+
     //POSORDER
     public String Posorder(NodoABB r) {
         String res = "";
@@ -183,7 +197,7 @@ public class ArbolBB implements Serializable {
             }
         }
     }
-    
+
     public NodoABB Busqueda(String ced) {
         return Busqueda(ced, this.raiz);
     }
@@ -192,7 +206,7 @@ public class ArbolBB implements Serializable {
     public String getCodigo(NodoABB nodo) {
         return ((Libro) nodo.getInfo()).getCodigo();
     }
-    
+
     public NodoABB Busquedal(String cod, NodoABB nodo) {
         String s = "";
         if (nodo == null) {
@@ -210,7 +224,7 @@ public class ArbolBB implements Serializable {
             }
         }
     }
-    
+
     public NodoABB Busquedal(String cod) {
         return Busquedal(cod, this.raiz);
     }
@@ -327,9 +341,7 @@ public class ArbolBB implements Serializable {
         }
     }
 
-    
-    
-     //Metodo para Eliminar liibro
+    //Metodo para Eliminar liibro
     public void EliminarNodol(String id, NodoABB raiz, NodoABB aux) {
         if (aux == null) {
             return;
@@ -391,14 +403,11 @@ public class ArbolBB implements Serializable {
         }
     }
 
-    
-    
-    
     //Retornar nodo
     public NodoABB retornarNododePersona(String cedula) {
         profundidad = 0;
         NodoABB nodo_aux = this.getRaiz();
-        Estudiante persona_aux = new Estudiante(cedula,"","",new Fecha(0,0,0),"",0);
+        Estudiante persona_aux = new Estudiante(cedula, "", "", new Fecha(0, 0, 0), "", 0);
         NodoABB nodo_persona = new NodoABB(persona_aux);
         while (!cedula.equals(((Estudiante) nodo_aux.getInfo()).getCedula())) {
             profundidad++;
@@ -442,27 +451,31 @@ public class ArbolBB implements Serializable {
     public int Comparar(String id, NodoABB A) {
         return id.compareTo(((Estudiante) A.getInfo()).getCedula());
     }
+
     //Método para comparar Libro
     public int Compararl(String id, NodoABB A) {
         return id.compareTo(((Libro) A.getInfo()).getCodigo());
     }
+
     //Métodos para generar el .text
-    public ListaLineal Niveles(ListaLineal lista){
+    public ListaLineal Niveles(ListaLineal lista) {
         lista.Clear();
         lista.IngresarInicio(this.raiz);
         Nodo n = lista.getInicio();
 
-        while (n != null) {            
-            if(((NodoABB)n.getInfo()).gethIzq() != null)
-                lista.IngresarFinal(((NodoABB)n.getInfo()).gethIzq());
-            if(((NodoABB)n.getInfo()).gethDer()!= null)
-                lista.IngresarFinal(((NodoABB)n.getInfo()).gethDer());
+        while (n != null) {
+            if (((NodoABB) n.getInfo()).gethIzq() != null) {
+                lista.IngresarFinal(((NodoABB) n.getInfo()).gethIzq());
+            }
+            if (((NodoABB) n.getInfo()).gethDer() != null) {
+                lista.IngresarFinal(((NodoABB) n.getInfo()).gethDer());
+            }
             n = n.getSig();
-            
+
         }
-        
+
         return lista;
     }
     ////////////////////PRUEBAAAAAAAAAAAAAAAAAAA///////////////////////////////////////////
-    
+
 }
