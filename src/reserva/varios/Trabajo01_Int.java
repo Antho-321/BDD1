@@ -1,6 +1,5 @@
 package reserva.varios;
 
-import java.util.Date;
 import javax.swing.JOptionPane;
 import Estructura.*;
 import Serializacion.*;
@@ -324,7 +323,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
                 btnVerEstudiantesRegistradosRegEstActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVerEstudiantesRegistradosRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, 180, 30));
+        jPanel1.add(btnVerEstudiantesRegistradosRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 310, 30));
 
         btnModificarEstudianteRegEst.setText("Modificar Estudiante");
         btnModificarEstudianteRegEst.addActionListener(new java.awt.event.ActionListener() {
