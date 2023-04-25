@@ -6,8 +6,13 @@ import Serializacion.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Estructura.ListaLineal;
+import Estructura.ArbolBB;
+import Estructura.NodoABB;
+
 public class Trabajo01_Int extends javax.swing.JFrame {
 
+    
     /*
     /////////////////////
     AQUI VA LA LISTA DE ESTUDIANTES EN GENERAL, Y LA LISTA DE LIBROS
@@ -15,9 +20,19 @@ public class Trabajo01_Int extends javax.swing.JFrame {
      */
     ArbolBB listaEstudiantes = new ArbolBB();
     ArbolBB listaLibros = new ArbolBB();
+    
+    
+    //Mis variables para serializar
+    String rutaArchivo;
+    ListaLineal listaNiveles;
+    Serializador serializador;
 
     public Trabajo01_Int() {
         initComponents();
+        listaNiveles = new ListaLineal();
+        rutaArchivo = "";
+        serializador = new Serializador();
+        
     }
 
     //-------------------------------------------------------
@@ -229,6 +244,8 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
+        btnAbrirEstudiantesRegEst = new javax.swing.JButton();
+        btnGuardarEstudiantesRegEst = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -315,7 +332,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         txtAreaRegEst.setRows(5);
         jScrollPane4.setViewportView(txtAreaRegEst);
 
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(334, 60, 500, 410));
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(334, 60, 500, 370));
 
         btnVerEstudiantesRegistradosRegEst.setText("Ver Estudiantes Registrados");
         btnVerEstudiantesRegistradosRegEst.addActionListener(new java.awt.event.ActionListener() {
@@ -375,6 +392,22 @@ public class Trabajo01_Int extends javax.swing.JFrame {
 
         jLabel28.setText("Mes");
         jPanel1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, -1, -1));
+
+        btnAbrirEstudiantesRegEst.setText("Abrir Archivo Estudiantes");
+        btnAbrirEstudiantesRegEst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbrirEstudiantesRegEstActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAbrirEstudiantesRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 440, 250, 30));
+
+        btnGuardarEstudiantesRegEst.setText("Guardar Archivo Estudiantes");
+        btnGuardarEstudiantesRegEst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarEstudiantesRegEstActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardarEstudiantesRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, 250, 30));
 
         jTabbedPane2.addTab("Registrar Estudiantes", jPanel1);
 
@@ -567,6 +600,25 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         modificarEstudiante();
     }//GEN-LAST:event_btnModificarEstudianteRegEstActionPerformed
 
+    private void btnAbrirEstudiantesRegEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirEstudiantesRegEstActionPerformed
+        // TODO add your handling code here:   
+        listaEstudiantes.setRaiz(null);
+        fcMenu.showOpenDialog(fcMenu);
+        if(fcMenu.getSelectedFile() != null){
+            this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
+
+            serializador.Deserializar(rutaArchivo, listaEstudiantes);
+        }
+    }//GEN-LAST:event_btnAbrirEstudiantesRegEstActionPerformed
+
+    private void btnGuardarEstudiantesRegEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarEstudiantesRegEstActionPerformed
+        // TODO add your handling code here:
+        fcMenu.showOpenDialog(fcMenu);
+        this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
+        listaEstudiantes.Niveles(listaNiveles);
+        System.out.println(serializador.Serializar(rutaArchivo, listaNiveles));
+    }//GEN-LAST:event_btnGuardarEstudiantesRegEstActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -576,11 +628,16 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         });
     }
 
+    //Variable para abrir menu
+    javax.swing.JFileChooser fcMenu = new javax.swing.JFileChooser();
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAbrirEstudiantesRegEst;
     private javax.swing.JButton btnBuscarLibroResLibro;
     private javax.swing.JButton btnDevolverLibroResLibro;
     private javax.swing.JButton btnEliminarEstudianteRegEst;
     private javax.swing.JButton btnEliminarLibroRegLibro;
+    private javax.swing.JButton btnGuardarEstudiantesRegEst;
     private javax.swing.JButton btnModificarEstudianteRegEst;
     private javax.swing.JButton btnModificarLibroRegLibro;
     private javax.swing.JButton btnRegistrarEstudianteRegEst;

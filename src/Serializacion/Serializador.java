@@ -1,17 +1,19 @@
 package Serializacion;
 
-import Estructura.ArbolBB;
-import Estructura.ListaLineal;
-import Estructura.NodoABB;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import Estructura.ListaLineal;
+import Estructura.ArbolBB;
+import Estructura.NodoABB;
+import reserva.varios.Persona;
+import reserva.varios.Estudiante;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
-import reserva.varios.Estudiante;
-import reserva.varios.Persona;
+import javax.swing.JOptionPane;
+
 
 public class Serializador {
     final private Gson gson;
@@ -22,6 +24,7 @@ public class Serializador {
     }
     
     public String Serializar(String ruta, ListaLineal lista){
+        
         try {
             archivo = new File(ruta);
         } catch (Exception e) {
@@ -30,6 +33,7 @@ public class Serializador {
         
         Object a;
         String jSonString = "";
+        
         try (var pw = new PrintWriter(archivo)) {
             while(!lista.Vacia()){
                 a = (NodoABB)lista.Retirar().getInfo();
@@ -37,9 +41,12 @@ public class Serializador {
                 EscribirJson(pw, jSonString);
             }  
         }catch (Exception e) {
+            System.out.println(e);
             return "Error al escribir el archivo";
         }
         
+        
+        JOptionPane.showMessageDialog(null, "Archivo guardado");
         return "Serialización exitosa!";
         
     }
@@ -51,12 +58,16 @@ public class Serializador {
         try {
             FileReader fileReader = new FileReader(ruta);
             BufferedReader br = new BufferedReader(fileReader);
-            Estudiante p;
+            //System.out.println("Archivo encontrado");
+            JOptionPane.showMessageDialog(null, "Archivo Cargado");
+            Estudiante es;
             while ((linea = br.readLine()) != null) {                
                 stringJson += linea;
                 if(linea.compareTo("}") == 0){
-                    p = gson.fromJson(stringJson, Estudiante.class);
-                    arbol.Ingresar(p);
+                    es = gson.fromJson(stringJson, Estudiante.class);
+                    
+                    arbol.Ingresar(es);
+                   
                     stringJson = "";
                 }
             }

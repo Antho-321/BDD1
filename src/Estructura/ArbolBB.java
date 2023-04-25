@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Estructura;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import reserva.varios.*;
 
-/**
- *
- * @author bd678
- */
 public class ArbolBB implements Serializable {
 
     //Auxiliar pa eliminar
