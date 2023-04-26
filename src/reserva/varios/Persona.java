@@ -1,4 +1,5 @@
 package reserva.varios;
+import java.util.Date;
 
 public class Persona {
     protected String cedula;

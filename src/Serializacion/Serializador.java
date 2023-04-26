@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import javax.swing.JOptionPane;
+import reserva.varios.Libro;
 
 
 public class Serializador {
@@ -23,7 +24,7 @@ public class Serializador {
         gson = new GsonBuilder().setPrettyPrinting().create();
     }
     
-    public String Serializar(String ruta, ListaLineal lista){
+    public String SerializarEstudiante(String ruta, ListaLineal lista){
         
         try {
             archivo = new File(ruta);
@@ -35,23 +36,21 @@ public class Serializador {
         String jSonString = "";
         
         try (var pw = new PrintWriter(archivo)) {
+            
             while(!lista.Vacia()){
                 a = (NodoABB)lista.Retirar().getInfo();
                 jSonString = TransformarJSon(gson, (Persona)((NodoABB)a).getInfo());
                 EscribirJson(pw, jSonString);
             }  
         }catch (Exception e) {
-            System.out.println(e);
             return "Error al escribir el archivo";
-        }
-        
-        
+        }      
         JOptionPane.showMessageDialog(null, "Archivo guardado");
         return "Serialización exitosa!";
         
     }
     
-    public String Deserializar(String ruta, ArbolBB arbol){
+    public String DeserializarEstudiante(String ruta, ArbolBB arbol){
         String stringJson = "";
         String linea;
         
@@ -77,6 +76,63 @@ public class Serializador {
         }
         return "Deserialización exitosa!";
     }
+    
+    //PARTE DE SERIALIZACION DE LOS LIBROS
+    public String SerializarLibro(String ruta, ListaLineal lista){
+        
+        try {
+            archivo = new File(ruta);
+        } catch (Exception e) {
+            return "Error al crear el archivo";
+        }
+        
+        Object a;
+        String jSonString = "";
+        
+        try (var pw = new PrintWriter(archivo)) {
+            
+            while(!lista.Vacia()){
+                a = (NodoABB)lista.Retirar().getInfo();
+                jSonString = TransformarJSon(gson, (Libro)((NodoABB)a).getInfo());
+                EscribirJson(pw, jSonString);
+            }  
+        }catch (Exception e) {
+            return "Error al escribir el archivo";
+        }
+        
+        
+        JOptionPane.showMessageDialog(null, "Archivo guardado");
+        return "Serialización exitosa!";
+        
+    }
+    
+    public String DeserializarLibro(String ruta, ArbolBB arbol){
+        String stringJson = "";
+        String linea;
+        
+        try {
+            FileReader fileReader = new FileReader(ruta);
+            BufferedReader br = new BufferedReader(fileReader);
+            //System.out.println("Archivo encontrado");
+            JOptionPane.showMessageDialog(null, "Archivo Cargado");
+            Libro lib;
+            while ((linea = br.readLine()) != null) {                
+                stringJson += linea;
+                if(linea.compareTo("}") == 0){
+                    lib = gson.fromJson(stringJson, Libro.class);
+                    
+                    arbol.Ingresar(lib);
+                   
+                    stringJson = "";
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            return "Error";
+        }
+        return "Deserialización exitosa!";
+    }
+    
     public static String TransformarJSon(Gson gson, Object o){
         return gson.toJson(o);
     }

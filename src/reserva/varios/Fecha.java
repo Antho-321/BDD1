@@ -1,5 +1,4 @@
 package reserva.varios;
-//import java.time.LocalDate;
 
 
 public class Fecha {
@@ -7,7 +6,6 @@ public class Fecha {
     private int mes;
     private int año;
     
-
 
     /**
      * Método constructor que crea un objeto fecha con atributos: día, mes y año
@@ -207,11 +205,6 @@ public class Fecha {
      * segunda
      * @return 
      */
-    
-    /*
-    public int Comparar() {
-        return Comparar(date.getDayOfMonth(),date.getMonthValue(),date.getYear());
-    }*/
     public int Comparar(Fecha f){
         return Comparar(f.día,f.mes,f.año);
     }
