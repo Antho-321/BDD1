@@ -112,9 +112,9 @@ public class Trabajo01_Int extends javax.swing.JFrame {
 
             listaEstudiantes.Ingresar(e);
             /*
-            //////////////////
+            /////////////////
             PARTE DE VALIDACION DE DATOS, SOLO ESTÁ LA FECHA
-            //////////////////
+            /////////////////
              */
 
             JOptionPane.showMessageDialog(null, "Estudiante Registrado Correctamente");
