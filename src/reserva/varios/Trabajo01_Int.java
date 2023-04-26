@@ -25,32 +25,54 @@ public class Trabajo01_Int extends javax.swing.JFrame {
      */
     ArbolBB listaEstudiantes = new ArbolBB();
     ArbolBB listaLibros = new ArbolBB();
-    
+
     //Mis variables para serializar
+    String rutaInicial;
     String rutaArchivo;
     ListaLineal listaNiveles;
     Serializador serializador;
     //Variable para abrir menu
     javax.swing.JFileChooser fcMenu = new javax.swing.JFileChooser();
-    
-    
+    int respPregIn;
+
     public Trabajo01_Int() {
         initComponents();
-        
+        fcMenu.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         listaNiveles = new ListaLineal();
         rutaArchivo = "";
         serializador = new Serializador();
-        
+        respPregIn = JOptionPane.showConfirmDialog(null, "¿Desea abrir una carpeta guardada?", "", JOptionPane.YES_NO_OPTION);
+        if (respPregIn == JOptionPane.YES_OPTION) {
+            listaEstudiantes.setRaiz(null);
+            
+            fcMenu.showOpenDialog(fcMenu);
+            if (fcMenu.getSelectedFile() != null) {
+                rutaInicial = fcMenu.getSelectedFile().getAbsolutePath();
+                rutaArchivo=rutaInicial+"\\Estudiantes";
+                serializador.DeserializarEstudiante(rutaArchivo, listaEstudiantes);
+            }
+        }
         this.addWindowListener(new java.awt.event.WindowAdapter() {
 
             public void windowClosing(java.awt.event.WindowEvent evt) {
 
-                int respuesta = JOptionPane.showConfirmDialog(null, "¿Guardar cambios?", "", JOptionPane.YES_NO_OPTION);
-                if (respuesta == JOptionPane.YES_OPTION) {
+                respPregIn = JOptionPane.showConfirmDialog(null, "¿Guardar cambios?", "", JOptionPane.YES_NO_OPTION);
+                if (respPregIn == JOptionPane.YES_OPTION) {
                     fcMenu.showSaveDialog(fcMenu);
-                    rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
-                    listaEstudiantes.Niveles(listaNiveles);
-                    System.out.println(serializador.SerializarEstudiante(rutaArchivo, listaNiveles));
+                    rutaInicial = fcMenu.getSelectedFile().getAbsolutePath();
+                    new File(rutaInicial).mkdir();
+                    rutaArchivo = rutaInicial + "\\Estudiantes";
+                    //System.out.println(listaEstudiantes.tamaño(listaEstudiantes.getRaiz()));
+                    if(listaEstudiantes.tamaño(listaEstudiantes.getRaiz())!=0){
+                        listaEstudiantes.Niveles(listaNiveles);
+                        System.out.println(serializador.SerializarEstudiante(rutaArchivo, listaNiveles));
+                    }  
+                    rutaArchivo = rutaInicial + "\\Libros";
+                    if(listaLibros.tamaño(listaLibros.getRaiz())!=0){
+                        listaLibros.Niveles(listaNiveles);
+                        System.out.println(serializador.SerializarLibro(rutaArchivo, listaNiveles));
+                    }
+                    
                 }
             }
         });
@@ -77,21 +99,25 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         return digitoVerificador == verificadorObtenido;
     }
 //MÉTODO PARA VALIDAR UN STRING SEGÚN UNA EXPRESIÓN REGULAR
-    public boolean StringVálido(String expRegular, String strAEvaluar){
+
+    public boolean StringVálido(String expRegular, String strAEvaluar) {
         Pattern pattern = Pattern.compile(expRegular);
         // Create a matcher object from the input string
         Matcher matcher = pattern.matcher(strAEvaluar);
         // Return true if the input matches the pattern, false otherwise
         return matcher.matches();
     }
+
     //MÉTODO PARA VALIDAR EL NOMBRE Y APELLIDO
     public boolean nombreApellidoValido(String input) {
         return StringVálido("^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*$", input);
     }
+
     //MÉTODO PARA VALIDAR LAS PALABRAS QUE SE INGRESEN EN LA VENTANA DE REGISTRO DE LIBROS
     public boolean tituloRegLibrosValido(String input) {
         return StringVálido("[A-ZÁÉÍÓÚÜÑ0-9][a-záéíóúüñ\\s]*", input);
     }
+
     public boolean nombreRegLibrosValido(String input) {
         return StringVálido("[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ\\s]*", input);
     }
@@ -262,9 +288,9 @@ public class Trabajo01_Int extends javax.swing.JFrame {
             int numeroDisponibles = Integer.parseInt(txtNumeroDisponiblesRegLibro.getText());
 
             String codigo = generarCodigoLibro(nombre, añoEdicion, numeroCopias);
-
+            
             Libro lib = new Libro(categoria, codigo, nombre, autor, materia, materia, añoEdicion, numeroCopias, numeroDisponibles);
-
+            
             listaLibros.Ingresar(lib);
 
             /*
@@ -484,63 +510,59 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     }
 
     //Metodo para guardar/serializar arbol estudiantes
-    public void guardarEstudiantes(){
-        try{
+    public void guardarEstudiantes() {
+        try {
             fcMenu.showSaveDialog(fcMenu);
             this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
             listaEstudiantes.Niveles(listaNiveles);
             System.out.println(serializador.SerializarEstudiante(rutaArchivo, listaNiveles));
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
-        } 
+        }
     }
-    
+
     //Metodo para abrir/deserializar arbol estudiantes
-    public void abrirEstudiantes(){
-        try{
+    public void abrirEstudiantes() {
+        try {
             listaEstudiantes.setRaiz(null);
             fcMenu.showOpenDialog(fcMenu);
-            if(fcMenu.getSelectedFile() != null){
+            if (fcMenu.getSelectedFile() != null) {
                 this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
 
                 serializador.DeserializarEstudiante(rutaArchivo, listaEstudiantes);
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
-    
+
     //Metodo para guardar/serializar arbol libros
-    public void guardarLibros(){
-        try{
+    public void guardarLibros() {
+        try {
             fcMenu.showSaveDialog(fcMenu);
             this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
             listaLibros.Niveles(listaNiveles);
             System.out.println(serializador.SerializarLibro(rutaArchivo, listaNiveles));
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
-    
+
     //Metodo para abrir/deserializar arbol libros
-    public void abrirLibros(){
-        try{
+    public void abrirLibros() {
+        try {
             listaLibros.setRaiz(null);
             fcMenu.showOpenDialog(fcMenu);
-            if(fcMenu.getSelectedFile() != null){
+            if (fcMenu.getSelectedFile() != null) {
                 this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
 
                 serializador.DeserializarLibro(rutaArchivo, listaLibros);
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -978,7 +1000,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         // TODO add your handling code here:
         String librosEstudiante = listaLibrosEstudiante();
         txtAreaDatosEstudianteResLibro.setText(verificarEstudiantes(txtCedulaResLibro.getText()) + librosEstudiante);
-        
+
     }//GEN-LAST:event_btnVerificarEstudianteResLibroActionPerformed
 
     private void btnEliminarLibroRegLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarLibroRegLibroActionPerformed
@@ -1041,8 +1063,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         devolver();
     }//GEN-LAST:event_btnDevolverLibroResLibroActionPerformed
 
-    
-    
+
     private void cboxCatLibroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxCatLibroItemStateChanged
         // TODO add your handling code here:
 
