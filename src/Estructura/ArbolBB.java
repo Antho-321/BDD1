@@ -133,12 +133,12 @@ public class ArbolBB implements Serializable {
         String res = "";
         Libro libro;
         if (r != null) {
-            res += Inorderl(r.gethIzq());
+            res += InorderParametric(r.gethIzq(),Categoria);
             libro = (Libro) r.getInfo();
             if (libro.getCategoria().equals(Categoria)||Categoria.equals("Mostrar Todos")) {
                  res += libro.toString() + "\n";
             }
-            res += Inorderl(r.gethDer());
+            res += InorderParametric(r.gethDer(),Categoria);
         }
         return res;
     }

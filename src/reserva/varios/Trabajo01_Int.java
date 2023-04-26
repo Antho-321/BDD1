@@ -1002,23 +1002,6 @@ public class Trabajo01_Int extends javax.swing.JFrame {
 
         String item = (String) cboxCatLibro.getSelectedItem(); // get the selected item as an Object
         reporteLibrosParametrico(item);
-        switch (item) {
-            case "Romance":
-                reporteLibrosParametrico("Romance");
-                break;
-            case "Ficción":
-                reporteLibrosParametrico("Ficción");
-                break;
-            case "Comedia":
-                reporteLibrosParametrico("Comedia");
-                break;
-            case "Ciencia":
-                reporteLibrosParametrico("Ciencia");
-                break;
-            case "Drama":
-                reporteLibrosParametrico("Drama");
-                break;
-        }
     }//GEN-LAST:event_cboxCatLibroItemStateChanged
 
     private void btnAbrirEstudiantesRegEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirEstudiantesRegEstActionPerformed
