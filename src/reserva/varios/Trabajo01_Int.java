@@ -58,15 +58,24 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         int verificadorObtenido = total % 10 == 0 ? 0 : 10 - total % 10;
         return digitoVerificador == verificadorObtenido;
     }
-
-    //MÉTODO PARA VALIDAR EL NOMBRE Y APELLIDO
-    public boolean nombreApellidoValido(String input) {
-        // Compile the regex pattern
-        Pattern pattern = Pattern.compile("^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*$");
+//MÉTODO PARA VALIDAR UN STRING SEGÚN UNA EXPRESIÓN REGULAR
+    public boolean StringVálido(String expRegular, String strAEvaluar){
+        Pattern pattern = Pattern.compile(expRegular);
         // Create a matcher object from the input string
-        Matcher matcher = pattern.matcher(input);
+        Matcher matcher = pattern.matcher(strAEvaluar);
         // Return true if the input matches the pattern, false otherwise
         return matcher.matches();
+    }
+    //MÉTODO PARA VALIDAR EL NOMBRE Y APELLIDO
+    public boolean nombreApellidoValido(String input) {
+        return StringVálido("^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*$", input);
+    }
+    //MÉTODO PARA VALIDAR LAS PALABRAS QUE SE INGRESEN EN LA VENTANA DE REGISTRO DE LIBROS
+    public boolean tituloRegLibrosValido(String input) {
+        return StringVálido("[A-ZÁÉÍÓÚÜÑ0-9][a-záéíóúüñ\\s]*", input);
+    }
+    public boolean nombreRegLibrosValido(String input) {
+        return StringVálido("[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ\\s]*", input);
     }
 
     //Metodo para ingreso de estudiantes
@@ -219,12 +228,12 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         String materia = (String) comboBoxMateriaRegLibro.getSelectedItem();
 
         try {
-            if (nombreApellidoValido(txtNombreRegLibro.getText())) {
+            if (tituloRegLibrosValido(txtNombreRegLibro.getText())) {
                 nombre = txtNombreRegLibro.getText();
             } else {
                 throw new NullPointerException("nombreInv");
             }
-            if (nombreApellidoValido(txtAutorRegLibro.getText())) {
+            if (nombreRegLibrosValido(txtAutorRegLibro.getText())) {
                 autor = txtAutorRegLibro.getText();
             } else {
                 throw new NullPointerException("apellidoInv");
