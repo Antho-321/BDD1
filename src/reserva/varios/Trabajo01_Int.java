@@ -10,6 +10,11 @@ import java.util.regex.Pattern;
 import Estructura.ListaLineal;
 import Estructura.ArbolBB;
 import Estructura.NodoABB;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import javax.swing.JFileChooser;
 
 public class Trabajo01_Int extends javax.swing.JFrame {
 
@@ -36,6 +41,19 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         rutaArchivo = "";
         serializador = new Serializador();
         
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Guardar cambios?", "", JOptionPane.YES_NO_OPTION);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    fcMenu.showSaveDialog(fcMenu);
+                    rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
+                    listaEstudiantes.Niveles(listaNiveles);
+                    System.out.println(serializador.SerializarEstudiante(rutaArchivo, listaNiveles));
+                }
+            }
+        });
     }
 
     //-------------------------------------------------------
