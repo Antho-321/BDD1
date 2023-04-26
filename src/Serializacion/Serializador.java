@@ -24,12 +24,12 @@ public class Serializador {
         gson = new GsonBuilder().setPrettyPrinting().create();
     }
     
-    public String SerializarEstudiante(String ruta, ListaLineal lista){
+    public boolean SerializarEstudiante(String ruta, ListaLineal lista){
         
         try {
             archivo = new File(ruta);
         } catch (Exception e) {
-            return "Error al crear el archivo";
+            return false;
         }
         
         Object a;
@@ -43,14 +43,14 @@ public class Serializador {
                 EscribirJson(pw, jSonString);
             }  
         }catch (Exception e) {
-            return "Error al escribir el archivo";
+            return false;
         }      
-        JOptionPane.showMessageDialog(null, "Archivo guardado");
-        return "Serialización exitosa!";
+        
+        return true;
         
     }
     
-    public String DeserializarEstudiante(String ruta, ArbolBB arbol){
+    public boolean DeserializarEstudiante(String ruta, ArbolBB arbol){
         String stringJson = "";
         String linea;
         
@@ -58,7 +58,7 @@ public class Serializador {
             FileReader fileReader = new FileReader(ruta);
             BufferedReader br = new BufferedReader(fileReader);
             //System.out.println("Archivo encontrado");
-            JOptionPane.showMessageDialog(null, "Archivo Cargado");
+            
             Estudiante es;
             while ((linea = br.readLine()) != null) {                
                 stringJson += linea;
@@ -72,23 +72,20 @@ public class Serializador {
             }
         } catch (Exception e) {
             System.out.println(e);
-            return "Error";
+            return false;
         }
-        return "Deserialización exitosa!";
+        return true;
     }
     
     //PARTE DE SERIALIZACION DE LOS LIBROS
-    public String SerializarLibro(String ruta, ListaLineal lista){
-        
+    public boolean SerializarLibro(String ruta, ListaLineal lista){
         try {
             archivo = new File(ruta);
         } catch (Exception e) {
-            return "Error al crear el archivo";
+            return false;
         }
-        
         Object a;
         String jSonString = "";
-        
         try (var pw = new PrintWriter(archivo)) {
             
             while(!lista.Vacia()){
@@ -97,16 +94,33 @@ public class Serializador {
                 EscribirJson(pw, jSonString);
             }  
         }catch (Exception e) {
-            return "Error al escribir el archivo";
+            return false;
         }
-        
-        
-        JOptionPane.showMessageDialog(null, "Archivo guardado");
-        return "Serialización exitosa!";
-        
+        return true;
+    }
+    //PARTE DE SERIALIZACION DE LAS RESERVAS
+    public boolean SerializarReserva(String ruta, ListaLineal lista){
+        try {
+            archivo = new File(ruta);
+        } catch (Exception e) {
+            return false;
+        }
+        Object a;
+        String jSonString = "";
+        try (var pw = new PrintWriter(archivo)) {
+            
+            while(!lista.Vacia()){
+                a = (NodoABB)lista.Retirar().getInfo();
+                jSonString = TransformarJSon(gson, (String[])((NodoABB)a).getInfo());
+                EscribirJson(pw, jSonString);
+            }  
+        }catch (Exception e) {
+            return false;
+        }
+        return true;
     }
     
-    public String DeserializarLibro(String ruta, ArbolBB arbol){
+    public boolean DeserializarLibro(String ruta, ArbolBB arbol){
         String stringJson = "";
         String linea;
         
@@ -114,7 +128,6 @@ public class Serializador {
             FileReader fileReader = new FileReader(ruta);
             BufferedReader br = new BufferedReader(fileReader);
             //System.out.println("Archivo encontrado");
-            JOptionPane.showMessageDialog(null, "Archivo Cargado");
             Libro lib;
             while ((linea = br.readLine()) != null) {                
                 stringJson += linea;
@@ -128,9 +141,33 @@ public class Serializador {
             }
         } catch (Exception e) {
             System.out.println(e);
-            return "Error";
+            return false;
         }
-        return "Deserialización exitosa!";
+        return true;
+    }
+    public boolean DeserializarReserva(String ruta, ArbolBB arbol){
+        String stringJson = "";
+        String linea;
+        
+        try {
+            FileReader fileReader = new FileReader(ruta);
+            BufferedReader br = new BufferedReader(fileReader);
+            //System.out.println("Archivo encontrado");
+            String[] lib;
+            while ((linea = br.readLine()) != null) {                
+                stringJson += linea;
+                if(linea.compareTo("}") == 0){
+                    lib = gson.fromJson(stringJson, String[].class);
+                    
+                    arbol.Ingresar(lib);
+                    stringJson = "";
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+        return true;
     }
     
     public static String TransformarJSon(Gson gson, Object o){

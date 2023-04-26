@@ -25,12 +25,15 @@ public class Trabajo01_Int extends javax.swing.JFrame {
      */
     ArbolBB listaEstudiantes = new ArbolBB();
     ArbolBB listaLibros = new ArbolBB();
+    ArbolBB listaReservas = new ArbolBB();
 
     //Mis variables para serializar
     String rutaInicial;
     String rutaArchivo;
     ListaLineal listaNiveles;
     Serializador serializador;
+    boolean msj1Mostrado=false;
+    boolean msj2Mostrado=false;
     //Variable para abrir menu
     javax.swing.JFileChooser fcMenu = new javax.swing.JFileChooser();
     int respPregIn;
@@ -44,12 +47,29 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         respPregIn = JOptionPane.showConfirmDialog(null, "¿Desea abrir una carpeta guardada?", "", JOptionPane.YES_NO_OPTION);
         if (respPregIn == JOptionPane.YES_OPTION) {
             listaEstudiantes.setRaiz(null);
-            
+            listaLibros.setRaiz(null);
             fcMenu.showOpenDialog(fcMenu);
             if (fcMenu.getSelectedFile() != null) {
                 rutaInicial = fcMenu.getSelectedFile().getAbsolutePath();
                 rutaArchivo=rutaInicial+"\\Estudiantes";
-                serializador.DeserializarEstudiante(rutaArchivo, listaEstudiantes);
+                
+                if(serializador.DeserializarEstudiante(rutaArchivo, listaEstudiantes)){
+                    msj1Mostrado=true;
+                    JOptionPane.showMessageDialog(null, "Archivos Cargados");
+                }
+                rutaArchivo=rutaInicial+"\\Libros";
+                if(serializador.DeserializarLibro(rutaArchivo, listaLibros)){
+                    if(msj1Mostrado==false){
+                        JOptionPane.showMessageDialog(null, "Archivos Cargados");
+                    }
+                }
+                rutaArchivo=rutaInicial+"\\Reservas";
+                if(serializador.DeserializarReserva(rutaArchivo, listaReservas)){
+                    Posorder(listaReservas.getRaiz());
+                    if(msj1Mostrado==false){
+                        JOptionPane.showMessageDialog(null, "Archivos Cargados");
+                    }
+                }
             }
         }
         this.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -65,14 +85,29 @@ public class Trabajo01_Int extends javax.swing.JFrame {
                     //System.out.println(listaEstudiantes.tamaño(listaEstudiantes.getRaiz()));
                     if(listaEstudiantes.tamaño(listaEstudiantes.getRaiz())!=0){
                         listaEstudiantes.Niveles(listaNiveles);
-                        System.out.println(serializador.SerializarEstudiante(rutaArchivo, listaNiveles));
+                        if(serializador.SerializarEstudiante(rutaArchivo, listaNiveles)){
+                            msj2Mostrado=true;
+                            JOptionPane.showMessageDialog(null, "Archivos guardados");
+                        }
                     }  
                     rutaArchivo = rutaInicial + "\\Libros";
                     if(listaLibros.tamaño(listaLibros.getRaiz())!=0){
                         listaLibros.Niveles(listaNiveles);
-                        System.out.println(serializador.SerializarLibro(rutaArchivo, listaNiveles));
+                        if(serializador.SerializarLibro(rutaArchivo, listaNiveles)){
+                            if(msj2Mostrado==false){
+                                JOptionPane.showMessageDialog(null, "Archivos guardados");
+                            }   
+                        }
                     }
-                    
+                    rutaArchivo = rutaInicial + "\\Reservas";
+                    if(listaReservas.tamaño(listaReservas.getRaiz())!=0){
+                        listaReservas.Niveles(listaNiveles);
+                        if(serializador.SerializarReserva(rutaArchivo, listaNiveles)){
+                            if(msj2Mostrado==false){
+                                JOptionPane.showMessageDialog(null, "Archivos guardados");
+                            }   
+                        }
+                    }
                 }
             }
         });
@@ -81,6 +116,19 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     //-------------------------------------------------------
     //MÉTODOS PARA TODOS LOS BOTONES SEGÚN SU FUNCIONALIDAD
     //-------------------------------------------------------
+    //MÉTODO PARA RESERVAR AL ABRIR UNA CARPETA DE TRABAJO
+        public String Posorder(NodoABB r) {
+        String res = "";
+        String[] str;
+        if (r != null) {
+            res += Posorder(r.gethIzq());
+            res += Posorder(r.gethDer());
+            str = (String[]) r.getInfo();
+            reservar(str[0],str[1]);
+            res += str.toString() + "\n";
+        }
+        return res;
+    }
     //PARTE DE INGRESO DE ESTUDIANTES EN EL FORMULARIO
     //MÉTODO PARA VALIDAR UNA CÉDULA
     public boolean cedulaValida(String cedula) {
@@ -432,10 +480,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
 
     //ESTA ES LA PARTE DE METODOS PARA EL MEDIO DE REDSERVA
     //Reservar libro
-    public void reservar() {
-        String codigo, cedula;
-        codigo = txtCodLibroResLibro.getText();
-        cedula = txtCedulaResLibro.getText();
+    public void reservar(String codigo, String cedula) {
         int requeridos = Integer.parseInt((String) comboBoxCantidadLibrosResLibro.getSelectedItem());
         Estudiante e;
         Libro l, l2;
@@ -595,8 +640,6 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        btnAbrirEstudiantesRegEst = new javax.swing.JButton();
-        btnGuardarEstudiantesRegEst = new javax.swing.JButton();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -626,8 +669,6 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         txtCodLibro = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        btnGuardarLibrosRedLibro = new javax.swing.JButton();
-        btnAbrirLibrosRegLibro = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaResLibro = new javax.swing.JTextArea();
@@ -749,22 +790,6 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         jLabel28.setText("Mes");
         jPanel1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
 
-        btnAbrirEstudiantesRegEst.setText("Abrir Archivo Estudiantes");
-        btnAbrirEstudiantesRegEst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAbrirEstudiantesRegEstActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnAbrirEstudiantesRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 490, 240, 30));
-
-        btnGuardarEstudiantesRegEst.setText("Guardar Archivo Estudiantes");
-        btnGuardarEstudiantesRegEst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarEstudiantesRegEstActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnGuardarEstudiantesRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 490, 250, 30));
-
         jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel33.setText("Registrar Estudiante");
         jPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, -1));
@@ -868,22 +893,6 @@ public class Trabajo01_Int extends javax.swing.JFrame {
 
         jLabel30.setText("Número de Disponibles");
         jPanel2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
-
-        btnGuardarLibrosRedLibro.setText("Guardar Archivo de Libros");
-        btnGuardarLibrosRedLibro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarLibrosRedLibroActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnGuardarLibrosRedLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 490, 240, 30));
-
-        btnAbrirLibrosRegLibro.setText("Abrir Archivo de Libros");
-        btnAbrirLibrosRegLibro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAbrirLibrosRegLibroActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnAbrirLibrosRegLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 490, 240, 30));
 
         jTabbedPane2.addTab("Registrar Libros", jPanel2);
 
@@ -1055,7 +1064,12 @@ public class Trabajo01_Int extends javax.swing.JFrame {
 
     private void btnReservarLibroResLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarLibroResLibroActionPerformed
         // TODO add your handling code here:
-        reservar();
+        String codigo=txtCodLibroResLibro.getText();
+        String cedula=txtCedulaResLibro.getText();
+        reservar(codigo,cedula);
+        listaReservas.setRaiz(null);
+        String[] reserva = {codigo, cedula};
+        listaReservas.Ingresar(reserva);
     }//GEN-LAST:event_btnReservarLibroResLibroActionPerformed
 
     private void btnDevolverLibroResLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverLibroResLibroActionPerformed
@@ -1071,26 +1085,6 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         reporteLibrosParametrico(item);
     }//GEN-LAST:event_cboxCatLibroItemStateChanged
 
-    private void btnAbrirEstudiantesRegEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirEstudiantesRegEstActionPerformed
-        // TODO add your handling code here:
-        abrirEstudiantes();
-    }//GEN-LAST:event_btnAbrirEstudiantesRegEstActionPerformed
-
-    private void btnGuardarEstudiantesRegEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarEstudiantesRegEstActionPerformed
-        // TODO add your handling code here:
-        guardarEstudiantes();
-    }//GEN-LAST:event_btnGuardarEstudiantesRegEstActionPerformed
-
-    private void btnAbrirLibrosRegLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirLibrosRegLibroActionPerformed
-        // TODO add your handling code here:
-        abrirLibros();
-    }//GEN-LAST:event_btnAbrirLibrosRegLibroActionPerformed
-
-    private void btnGuardarLibrosRedLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarLibrosRedLibroActionPerformed
-        // TODO add your handling code here:
-        guardarLibros();
-    }//GEN-LAST:event_btnGuardarLibrosRedLibroActionPerformed
-
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1101,14 +1095,10 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAbrirEstudiantesRegEst;
-    private javax.swing.JButton btnAbrirLibrosRegLibro;
     private javax.swing.JButton btnBuscarLibroResLibro;
     private javax.swing.JButton btnDevolverLibroResLibro;
     private javax.swing.JButton btnEliminarEstudianteRegEst;
     private javax.swing.JButton btnEliminarLibroRegLibro;
-    private javax.swing.JButton btnGuardarEstudiantesRegEst;
-    private javax.swing.JButton btnGuardarLibrosRedLibro;
     private javax.swing.JButton btnModificarEstudianteRegEst;
     private javax.swing.JButton btnModificarLibroRegLibro;
     private javax.swing.JButton btnRegistrarEstudianteRegEst;

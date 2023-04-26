@@ -88,6 +88,34 @@ public class ArbolBB implements Serializable {
             }
         }
     }
+    //METODO PARA INGRESAR UNA RESERVA
+    public void Ingresar(String[] p) {
+        NodoABB nuevo = new NodoABB(p);
+
+        if (this.raiz == null) {
+            this.raiz = nuevo;
+        } else {
+            NodoABB aux = raiz;
+            while (aux != null) {
+                int bandera = (((String[]) aux.getInfo())[0].compareTo(p[0]));
+                if (bandera < 0) {
+                    if (aux.gethDer() == null) {
+                        aux.sethDer(nuevo);
+                        break;
+                    }
+                    aux = aux.gethDer();
+                } else if (bandera > 0) {
+                    if (aux.gethIzq() == null) {
+                        aux.sethIzq(nuevo);
+                        break;
+                    }
+                    aux = aux.gethIzq();
+                } else {
+                    break;
+                }
+            }
+        }
+    }
 
     //PREORDER
     public String Preorder(NodoABB r) {
@@ -155,6 +183,7 @@ public class ArbolBB implements Serializable {
         }
         return res;
     }
+
 
     //METODO RECURSIVO PARA ENCONTRAR EL TAMAÑO DE UN ÁRBOL
     public int tamaño(NodoABB r) {
