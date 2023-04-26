@@ -112,9 +112,9 @@ public class Trabajo01_Int extends javax.swing.JFrame {
 
             listaEstudiantes.Ingresar(e);
             /*
-            //////////////////
+            /////////////////
             PARTE DE VALIDACION DE DATOS, SOLO ESTÁ LA FECHA
-            //////////////////
+            /////////////////
              */
 
             JOptionPane.showMessageDialog(null, "Estudiante Registrado Correctamente");
@@ -456,7 +456,6 @@ public class Trabajo01_Int extends javax.swing.JFrame {
                     + "\nLista de libros registrados:\n" + e.getLibrosEstudiante().Inorderl(e.getLibrosEstudiante().getRaiz()));
 
         } catch (Exception e) {
-
         }
         return "";
     }
@@ -961,7 +960,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         // TODO add your handling code here:
         String librosEstudiante = listaLibrosEstudiante();
         txtAreaDatosEstudianteResLibro.setText(verificarEstudiantes(txtCedulaResLibro.getText()) + librosEstudiante);
-
+        
     }//GEN-LAST:event_btnVerificarEstudianteResLibroActionPerformed
 
     private void btnEliminarLibroRegLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarLibroRegLibroActionPerformed
@@ -1031,23 +1030,6 @@ public class Trabajo01_Int extends javax.swing.JFrame {
 
         String item = (String) cboxCatLibro.getSelectedItem(); // get the selected item as an Object
         reporteLibrosParametrico(item);
-        switch (item) {
-            case "Romance":
-                reporteLibrosParametrico("Romance");
-                break;
-            case "Ficción":
-                reporteLibrosParametrico("Ficción");
-                break;
-            case "Comedia":
-                reporteLibrosParametrico("Comedia");
-                break;
-            case "Ciencia":
-                reporteLibrosParametrico("Ciencia");
-                break;
-            case "Drama":
-                reporteLibrosParametrico("Drama");
-                break;
-        }
     }//GEN-LAST:event_cboxCatLibroItemStateChanged
 
     private void btnAbrirEstudiantesRegEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirEstudiantesRegEstActionPerformed
