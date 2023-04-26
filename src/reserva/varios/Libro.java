@@ -1,6 +1,7 @@
 package reserva.varios;
 
-public class Libro {
+public class Libro implements Cloneable {
+
     private String categoria;
     private String codigo;
     private String nombre;
@@ -104,18 +105,24 @@ public class Libro {
     public void setNumeroDisponibles(int numeroDisponibles) {
         this.numeroDisponibles = numeroDisponibles;
     }
+    /////////////////////////////////////////////////////////////
+    public Object clone() throws CloneNotSupportedException{
+        return super.clone();
+    }
+    /////////////////////////////////////////////////////////////
 
     @Override
     public String toString() {
-        return "\n"+"Nombre: "+nombre +"\n"
-        +"Autor: "+autor +"\n"
-        +"Categoria: "+categoria +"\n"
-        +"Código: "+codigo +"\n"
-        +"Editorial: "+editorial +"\n"
-        +"Materia: "+materia +"\n"
-        +"Año de edición: "+añoEdicion +"\n"
-        +"Número de copias: "+numeroCopias +"\n"
-        +"Número de prestamos: "+numeroPrestamos +"\n"
-        +"Número disponibles: "+numeroDisponibles +"\n";
-    }   
+        return "_______________________________________________________________________"
+                + "\n" + "Nombre: " + nombre + "\n"
+                + "Autor: " + autor + "\n"
+                + "Categoria: " + categoria + "\n"
+                + "Código: " + codigo + "\n"
+                + "Editorial: " + editorial + "\n"
+                + "Materia: " + materia + "\n"
+                + "Año de edición: " + añoEdicion + "\n"
+                + "Número de copias: " + numeroCopias + "\n"
+                + "Número de prestamos: " + numeroPrestamos + "\n"
+                + "Número disponibles: " + numeroDisponibles + "\n";
+    }
 }
