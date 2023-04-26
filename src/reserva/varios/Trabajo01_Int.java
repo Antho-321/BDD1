@@ -447,7 +447,6 @@ public class Trabajo01_Int extends javax.swing.JFrame {
                     + "\nLista de libros registrados:\n" + e.getLibrosEstudiante().Inorderl(e.getLibrosEstudiante().getRaiz()));
 
         } catch (Exception e) {
-
         }
         return "";
     }
@@ -932,7 +931,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         // TODO add your handling code here:
         String librosEstudiante = listaLibrosEstudiante();
         txtAreaDatosEstudianteResLibro.setText(verificarEstudiantes(txtCedulaResLibro.getText()) + librosEstudiante);
-
+        
     }//GEN-LAST:event_btnVerificarEstudianteResLibroActionPerformed
 
     private void btnEliminarLibroRegLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarLibroRegLibroActionPerformed

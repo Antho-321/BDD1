@@ -210,9 +210,9 @@ public class ArbolBB implements Serializable {
             return nodo;
         } else {
             if (s.compareTo(cod) < 0) {
-                return Busqueda(cod, nodo.gethDer());
+                return Busquedal(cod, nodo.gethDer());
             } else {
-                return Busqueda(cod, nodo.gethIzq());
+                return Busquedal(cod, nodo.gethIzq());
             }
         }
     }
