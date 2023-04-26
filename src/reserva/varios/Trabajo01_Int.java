@@ -459,39 +459,59 @@ public class Trabajo01_Int extends javax.swing.JFrame {
 
     //Metodo para guardar/serializar arbol estudiantes
     public void guardarEstudiantes(){
-        fcMenu.showOpenDialog(fcMenu);
-        this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
-        listaEstudiantes.Niveles(listaNiveles);
-        System.out.println(serializador.SerializarEstudiante(rutaArchivo, listaNiveles));
+        try{
+            fcMenu.showSaveDialog(fcMenu);
+            this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
+            listaEstudiantes.Niveles(listaNiveles);
+            System.out.println(serializador.SerializarEstudiante(rutaArchivo, listaNiveles));
+        }
+        catch(Exception e){
+            System.out.println(e);
+        } 
     }
     
     //Metodo para abrir/deserializar arbol estudiantes
     public void abrirEstudiantes(){
-        listaEstudiantes.setRaiz(null);
-        fcMenu.showOpenDialog(fcMenu);
-        if(fcMenu.getSelectedFile() != null){
-            this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
+        try{
+            listaEstudiantes.setRaiz(null);
+            fcMenu.showOpenDialog(fcMenu);
+            if(fcMenu.getSelectedFile() != null){
+                this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
 
-            serializador.DeserializarEstudiante(rutaArchivo, listaEstudiantes);
+                serializador.DeserializarEstudiante(rutaArchivo, listaEstudiantes);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
         }
     }
     
     //Metodo para guardar/serializar arbol libros
     public void guardarLibros(){
-        fcMenu.showOpenDialog(fcMenu);
-        this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
-        listaLibros.Niveles(listaNiveles);
-        System.out.println(serializador.SerializarLibro(rutaArchivo, listaNiveles));
+        try{
+            fcMenu.showSaveDialog(fcMenu);
+            this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
+            listaLibros.Niveles(listaNiveles);
+            System.out.println(serializador.SerializarLibro(rutaArchivo, listaNiveles));
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
     }
     
     //Metodo para abrir/deserializar arbol libros
     public void abrirLibros(){
-        listaLibros.setRaiz(null);
-        fcMenu.showOpenDialog(fcMenu);
-        if(fcMenu.getSelectedFile() != null){
-            this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
+        try{
+            listaLibros.setRaiz(null);
+            fcMenu.showOpenDialog(fcMenu);
+            if(fcMenu.getSelectedFile() != null){
+                this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
 
-            serializador.DeserializarLibro(rutaArchivo, listaLibros);
+                serializador.DeserializarLibro(rutaArchivo, listaLibros);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
         }
     }
     
@@ -624,7 +644,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         txtAreaRegEst.setRows(5);
         jScrollPane4.setViewportView(txtAreaRegEst);
 
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(334, 60, 500, 420));
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 500, 400));
 
         btnVerEstudiantesRegistradosRegEst.setText("Ver Estudiantes Registrados");
         btnVerEstudiantesRegistradosRegEst.addActionListener(new java.awt.event.ActionListener() {
@@ -632,7 +652,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
                 btnVerEstudiantesRegistradosRegEstActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVerEstudiantesRegistradosRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 310, 30));
+        jPanel1.add(btnVerEstudiantesRegistradosRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, 310, 30));
 
         btnModificarEstudianteRegEst.setText("Modificar Estudiante");
         btnModificarEstudianteRegEst.addActionListener(new java.awt.event.ActionListener() {
@@ -687,7 +707,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
                 btnAbrirEstudiantesRegEstActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAbrirEstudiantesRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, 250, 30));
+        jPanel1.add(btnAbrirEstudiantesRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 490, 240, 30));
 
         btnGuardarEstudiantesRegEst.setText("Guardar Archivo Estudiantes");
         btnGuardarEstudiantesRegEst.addActionListener(new java.awt.event.ActionListener() {
@@ -792,7 +812,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
                 btnVerLibrosRegistradosRegLibroActionPerformed(evt);
             }
         });
-        jPanel2.add(btnVerLibrosRegistradosRegLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 40, 150, 30));
+        jPanel2.add(btnVerLibrosRegistradosRegLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 40, 230, 30));
         jPanel2.add(txtCodLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 160, -1));
 
         jLabel29.setText("_______________________________________________________________");
