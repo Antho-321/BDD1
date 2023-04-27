@@ -6,6 +6,10 @@ import reserva.varios.*;
 
 public class ArbolBB implements Serializable {
 
+    
+    private NodoABB raiz;
+    
+    
     //Auxiliar pa eliminar
     private int profundidad = 0;
     //Auxiliar para el .text
@@ -22,7 +26,7 @@ public class ArbolBB implements Serializable {
     public void setRaiz(NodoABB raiz) {
         this.raiz = raiz;
     }
-    private NodoABB raiz;
+    
 
     //Constructor
     public ArbolBB() {

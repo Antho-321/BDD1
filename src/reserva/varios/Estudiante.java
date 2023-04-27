@@ -5,7 +5,7 @@ import Estructura.ArbolBB;
 public class Estudiante extends Persona{
     private String carrera;
     private int nivel;
-    private ArbolBB librosEstudiante= new ArbolBB();
+    private ArbolBB librosEstudiante = new ArbolBB();
     public Estudiante() {
         super();
     }
@@ -80,8 +80,7 @@ public class Estudiante extends Persona{
         this.fechaNacimiento= edad;
     }
     
-    
-    
+
     @Override
     public String toString(){
         return "_______________________________________________________________________"+"\n"+
@@ -92,8 +91,5 @@ public class Estudiante extends Persona{
                 "Carrera: "+ this.carrera+"\n"+
                 "Nivel: "+ this.nivel+"\n";
     }
-
-    
-
-    
+  
 }
