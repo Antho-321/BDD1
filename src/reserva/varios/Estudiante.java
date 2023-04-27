@@ -82,6 +82,7 @@ public class Estudiante extends Persona{
     
     
     
+    @Override
     public String toString(){
         return "_______________________________________________________________________"+"\n"+
                 "Nombre: "+ this.nombre+"\n"+

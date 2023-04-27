@@ -394,19 +394,16 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         cedula = txtCedulaResLibro.getText();
         int requeridos = Integer.parseInt((String) comboBoxCantidadLibrosResLibro.getSelectedItem());
         Estudiante e;
-        Libro l, l2;
+        Libro l;
         try {
             e = (Estudiante) listaEstudiantes.Busqueda(cedula).getInfo();
             l = (Libro) listaLibros.Busquedal(codigo).getInfo();
-            if (l.getNumeroDisponibles() > requeridos && e.getLibrosEstudiante().Busquedal(codigo) == null) {
-                //Se le asigna la cantidad de libros reservados
-                l2 = (Libro) l.clone();
-                l2.setNumeroDisponibles(requeridos);
-                l2.setNumeroPrestamos(requeridos);
+            if (l.getNumeroDisponibles() >= requeridos && e.getLibrosEstudiante().BusquedaReserva(codigo) == null) {
                 ///////////////////////////////////////////////
+                Reserva r= new Reserva(l, requeridos);
                 l.setNumeroDisponibles(l.getNumeroDisponibles() - requeridos);
                 l.setNumeroPrestamos(+requeridos);
-                e.getLibrosEstudiante().Ingresar(l2);
+                e.getLibrosEstudiante().IngresarReserva(r);
                 JOptionPane.showMessageDialog(null, "Libro reservado correctamente!!!");
             } else {
                 JOptionPane.showMessageDialog(null, "No existen copias suficientes disponibles, o ya reservó este libro");
@@ -424,19 +421,19 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         cedula = txtCedulaResLibro.getText();
         int requeridos = Integer.parseInt((String) comboBoxCantidadLibrosResLibro.getSelectedItem());
         Estudiante e;
-        Libro l, l2;
+        Libro l;
+        Reserva r;
         try {
             e = (Estudiante) listaEstudiantes.Busqueda(cedula).getInfo();
             l = (Libro) listaLibros.Busquedal(codigo).getInfo();
-            l2 = (Libro) e.getLibrosEstudiante().Busquedal(codigo).getInfo();
+            r = (Reserva) e.getLibrosEstudiante().BusquedaReserva(codigo).getInfo();
 
-            if (requeridos <= l2.getNumeroDisponibles()) {
+            if (requeridos <= r.getCantidad()) {
                 l.setNumeroDisponibles(l.getNumeroDisponibles() + requeridos);
-                l.setNumeroPrestamos(-requeridos);
-                l2.setNumeroDisponibles(l2.getNumeroDisponibles() - requeridos);
-                l2.setNumeroPrestamos(l2.getNumeroPrestamos() - requeridos);
-                if (l2.getNumeroDisponibles() == 0) {
-                    e.getLibrosEstudiante().EliminarNodol(codigo, e.getLibrosEstudiante().getRaiz(), e.getLibrosEstudiante().getRaiz());
+                l.setNumeroPrestamos(l.getNumeroPrestamos()-requeridos);
+                r.setCantidad(r.getCantidad() - requeridos);
+                if (r.getCantidad() == 0) {
+                    e.getLibrosEstudiante().EliminarNodoReserva(codigo, e.getLibrosEstudiante().getRaiz(), e.getLibrosEstudiante().getRaiz());
                 }
                 JOptionPane.showMessageDialog(null, "Libro devuelto correctamente!!!");
             } else {
@@ -453,7 +450,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         try {
             Estudiante e = (Estudiante) listaEstudiantes.Busqueda(cedula).getInfo();
             return ("_______________________________________________________________________"
-                    + "\nLista de libros registrados:\n" + e.getLibrosEstudiante().Inorderl(e.getLibrosEstudiante().getRaiz()));
+                    + "\nLista de libros registrados:\n" + e.getLibrosEstudiante().InorderReserva(e.getLibrosEstudiante().getRaiz()));
 
         } catch (Exception e) {
         }

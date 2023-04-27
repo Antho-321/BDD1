@@ -1,6 +1,6 @@
 package reserva.varios;
 
-public class Libro implements Cloneable {
+public class Libro {
 
     private String categoria;
     private String codigo;
@@ -105,11 +105,6 @@ public class Libro implements Cloneable {
     public void setNumeroDisponibles(int numeroDisponibles) {
         this.numeroDisponibles = numeroDisponibles;
     }
-    /////////////////////////////////////////////////////////////
-    public Object clone() throws CloneNotSupportedException{
-        return super.clone();
-    }
-    /////////////////////////////////////////////////////////////
 
     @Override
     public String toString() {
