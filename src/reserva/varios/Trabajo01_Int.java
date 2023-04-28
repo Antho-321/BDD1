@@ -67,8 +67,11 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         return matcher.matches();
     }
     //MÉTODO PARA VALIDAR EL NOMBRE Y APELLIDO
-    public boolean nombreApellidoValido(String input) {
-        return StringVálido("^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*$", input);
+    public boolean nombreValido(String input) {
+        return StringVálido("^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+([- ][A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)*$", input);
+    }
+    public boolean apellidoValido(String input) {
+        return StringVálido("^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+([- ][A-ZÁÉÍÓÚÑ]*[a-záéíóúñ]+)*$", input);
     }
     //MÉTODO PARA VALIDAR LAS PALABRAS QUE SE INGRESEN EN LA VENTANA DE REGISTRO DE LIBROS
     public boolean tituloRegLibrosValido(String input) {
@@ -86,12 +89,12 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         int nivel = Integer.parseInt((String) comboBoxNivelRegEst.getSelectedItem());
 
         try {
-            if (nombreApellidoValido(txtNombreRegEst.getText())) {
+            if (nombreValido(txtNombreRegEst.getText())) {
                 nombre = txtNombreRegEst.getText();
             } else {
                 throw new NullPointerException("nombreInv");
             }
-            if (nombreApellidoValido(txtApellidoRegEst.getText())) {
+            if (apellidoValido(txtApellidoRegEst.getText())) {
                 apellido = txtApellidoRegEst.getText();
             } else {
                 throw new NullPointerException("apellidoInv");
@@ -241,7 +244,15 @@ public class Trabajo01_Int extends javax.swing.JFrame {
             int añoEdicion = Integer.parseInt(txtAñoEdicionRegLibro.getText());
             int numeroCopias = Integer.parseInt(txtNumeroCopiasRegLibro.getText());
             int numeroDisponibles = Integer.parseInt(txtNumeroDisponiblesRegLibro.getText());
-
+            if(!(añoEdicion>=1960&&añoEdicion<=2023)){
+                throw new NumberFormatException("añoInv");
+            }
+            if(numeroDisponibles<1){
+                throw new NumberFormatException("menor");
+            }
+            if(numeroCopias<=48){
+                throw new NumberFormatException("menor");
+            }
             String codigo = generarCodigoLibro(nombre, añoEdicion, numeroCopias);
 
             Libro lib = new Libro(categoria, codigo, nombre, autor, materia, materia, añoEdicion, numeroCopias, numeroDisponibles);
@@ -257,9 +268,18 @@ public class Trabajo01_Int extends javax.swing.JFrame {
 
             txtAreaRegLibro.setText("Libro Registrado:\n" + lib);
         } catch (NumberFormatException e) {
+            String msj=e.getMessage();
+            switch(msj){
+                case "menor":
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese cantidades válidas");
+                    break;
+                case "añoInv":
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese un año de edición válido");
+                    break;
+                default:
             JOptionPane.showMessageDialog(null, "Por favor registre números en la parte numérica");
             /////////////////////////////ESTE CATCH SE DEBE CORREGIR E IMPLEMENTAR PARA LIBROS//////////////////
-        } catch (NullPointerException e) {
+        }} catch (NullPointerException e) {
             switch (e.getMessage()) {
                 case "nombreInv":
                     JOptionPane.showMessageDialog(null, "Por favor ingrese un nombre válido");
@@ -274,6 +294,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(null, "Por favor registre una fecha de nacimiento válida");
         }
+        
     }
 
     //Método para generar código en un libro
@@ -333,12 +354,12 @@ public class Trabajo01_Int extends javax.swing.JFrame {
             String oldData = "Datos antiguos:\n" + e.toString() + "\n";
             //Guarda la información antigua para ser mostrada después
             /////////////////////////////////////////////////////////////
-            if (nombreApellidoValido(txtNombreRegLibro.getText())) {
+            if (nombreValido(txtNombreRegLibro.getText())) {
                 nombre = txtNombreRegLibro.getText();
             } else {
                 throw new NullPointerException("nombreInv");
             }
-            if (nombreApellidoValido(txtAutorRegLibro.getText())) {
+            if (apellidoValido(txtAutorRegLibro.getText())) {
                 autor = txtAutorRegLibro.getText();
             } else {
                 throw new NullPointerException("apellidoInv");
