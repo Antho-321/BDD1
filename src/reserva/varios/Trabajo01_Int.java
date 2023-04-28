@@ -75,7 +75,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     }
     //MÉTODO PARA VALIDAR LAS PALABRAS QUE SE INGRESEN EN LA VENTANA DE REGISTRO DE LIBROS
     public boolean tituloRegLibrosValido(String input) {
-        return StringVálido("[A-ZÁÉÍÓÚÜÑ0-9][a-záéíóúüñ\\s]*", input);
+        return StringVálido("[0-9\\s]*[A-ZÁÉÍÓÚÑ\\s]*[a-záéíóúñ\\s]+([A-ZÁÉÍÓÚÑ\\s]*[a-záéíóúñ\\s]+)*", input);
     }
     public boolean nombreRegLibrosValido(String input) {
         return StringVálido("[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ\\s]*", input);
@@ -235,7 +235,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
             } else {
                 throw new NullPointerException("nombreInv");
             }
-            if (nombreRegLibrosValido(txtAutorRegLibro.getText())) {
+            if (apellidoValido(txtAutorRegLibro.getText())) {
                 autor = txtAutorRegLibro.getText();
             } else {
                 throw new NullPointerException("apellidoInv");
@@ -799,6 +799,11 @@ public class Trabajo01_Int extends javax.swing.JFrame {
 
         jTabbedPane2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTabbedPane2.setForeground(new java.awt.Color(102, 102, 102));
+        jTabbedPane2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane2MouseClicked(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(234, 236, 238));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -936,10 +941,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         comboBoxNivelRegEst.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8" }));
         jPanel2.add(comboBoxNivelRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 180, -1));
 
-
         btnRegistrarEstudianteRegEst.setText("Registrar Estudiante");
-
-
         btnRegistrarEstudianteRegEst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarEstudianteRegEstActionPerformed(evt);
@@ -974,7 +976,6 @@ public class Trabajo01_Int extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnGuardarEstudiantesRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 490, 250, 30));
-
 
         jTabbedPane2.addTab("Registrar Estudiantes", jPanel2);
 
@@ -1383,6 +1384,11 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         // TODO add your handling code here:
         reservar();
     }//GEN-LAST:event_btnReservarLibroResLibroActionPerformed
+
+    private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
+        String item = (String) cboxCatLibroResLibro.getSelectedItem(); // get the selected item as an Object
+        reporteLibrosParametrico(item);
+    }//GEN-LAST:event_jTabbedPane2MouseClicked
 
     public static void main(String args[]) {
 
