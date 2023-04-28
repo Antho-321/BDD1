@@ -1,4 +1,4 @@
-package reserva.varios;
+ package reserva.varios;
 
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -20,7 +20,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
      */
     ArbolBB listaEstudiantes = new ArbolBB();
     ArbolBB listaLibros = new ArbolBB();
-
+    ArbolBB listaReservas = new ArbolBB();
     
     //Mis variables para serializar
     String rutaArchivo;
@@ -393,18 +393,19 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         String codigo, cedula;
         codigo = txtCodLibroResLibro.getText();
         cedula = txtCedulaResLibro.getText();
+        String codigof=cedula+codigo;
         int requeridos = Integer.parseInt((String) comboBoxCantidadLibrosResLibro.getSelectedItem());
         Estudiante e;
         Libro l;
         try {
             e = (Estudiante) listaEstudiantes.Busqueda(cedula).getInfo();
             l = (Libro) listaLibros.Busquedal(codigo).getInfo();
-            if (l.getNumeroDisponibles() >= requeridos && e.getLibrosEstudiante().BusquedaReserva(codigo) == null) {
+            if (l.getNumeroDisponibles() >= requeridos && listaReservas.BusquedaReserva(codigof) == null) {
                 ///////////////////////////////////////////////
-                Reserva r= new Reserva(l, requeridos);
+                Reserva r= new Reserva(l, requeridos,codigof);
                 l.setNumeroDisponibles(l.getNumeroDisponibles() - requeridos);
                 l.setNumeroPrestamos(+requeridos);
-                e.getLibrosEstudiante().IngresarReserva(r);
+                listaReservas.IngresarReserva(r);
                 JOptionPane.showMessageDialog(null, "Libro reservado correctamente!!!");
             } else {
                 JOptionPane.showMessageDialog(null, "No existen copias suficientes disponibles, o ya reservó este libro");
@@ -420,6 +421,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         String codigo, cedula;
         codigo = txtCodLibroResLibro.getText();
         cedula = txtCedulaResLibro.getText();
+        String codigof= cedula+codigo;
         int requeridos = Integer.parseInt((String) comboBoxCantidadLibrosResLibro.getSelectedItem());
         Estudiante e;
         Libro l;
@@ -427,14 +429,14 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         try {
             e = (Estudiante) listaEstudiantes.Busqueda(cedula).getInfo();
             l = (Libro) listaLibros.Busquedal(codigo).getInfo();
-            r = (Reserva) e.getLibrosEstudiante().BusquedaReserva(codigo).getInfo();
+            r = (Reserva) listaReservas.BusquedaReserva(codigof).getInfo();
 
             if (requeridos <= r.getCantidad()) {
                 l.setNumeroDisponibles(l.getNumeroDisponibles() + requeridos);
                 l.setNumeroPrestamos(l.getNumeroPrestamos()-requeridos);
                 r.setCantidad(r.getCantidad() - requeridos);
                 if (r.getCantidad() == 0) {
-                    e.getLibrosEstudiante().EliminarNodoReserva(codigo, e.getLibrosEstudiante().getRaiz(), e.getLibrosEstudiante().getRaiz());
+                    listaReservas.EliminarNodoReserva(codigo, listaReservas.getRaiz(), listaReservas.getRaiz());
                 }
                 JOptionPane.showMessageDialog(null, "Libro devuelto correctamente!!!");
             } else {
@@ -449,11 +451,12 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     public String listaLibrosEstudiante() {
         String cedula = txtCedulaResLibro.getText();
         try {
-            Estudiante e = (Estudiante) listaEstudiantes.Busqueda(cedula).getInfo();
+
             return ("_______________________________________________________________________"
-                    + "\nLista de libros registrados:\n" + e.getLibrosEstudiante().InorderReserva(e.getLibrosEstudiante().getRaiz()));
+                    + "\nLista de libros registrados:\n" + listaReservas.InorderReservaSub(listaReservas.getRaiz(),cedula));
 
         } catch (Exception e) {
+            System.out.println(e);
         }
         return "";
     }
@@ -466,6 +469,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     //Metodo para guardar/serializar arbol estudiantes
     public void guardarEstudiantes(){
         try{
+            listaNiveles.Clear();
             fcMenu.showSaveDialog(fcMenu);
             this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
             listaEstudiantes.Niveles(listaNiveles);
@@ -496,6 +500,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     //Metodo para guardar/serializar arbol libros
     public void guardarLibros(){
         try{
+            listaNiveles.Clear();
             fcMenu.showSaveDialog(fcMenu);
             this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
             listaLibros.Niveles(listaNiveles);
@@ -521,6 +526,38 @@ public class Trabajo01_Int extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
+    //Metodo para guardar/serializar arbol reservas
+    public void guardarReservas(){
+        try{
+            listaNiveles.Clear();
+            fcMenu.showSaveDialog(fcMenu);
+            this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
+            listaReservas.Niveles(listaNiveles);      
+            serializador.SerializarReserva(rutaArchivo, listaNiveles);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        } 
+    }
+    
+    //Metodo para abrir/deserializar arbol reservas
+    public void abrirReservas(){
+        try{
+            listaReservas.setRaiz(null);
+            fcMenu.showOpenDialog(fcMenu);
+            if(fcMenu.getSelectedFile() != null){
+                this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
+
+                serializador.DeserializarEstudiante(rutaArchivo, listaReservas);
+            }
+        }
+        catch(Exception e){
+            System.out.println("Hay un error");
+            System.out.println(e);
+        }
+    }
+    
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -641,6 +678,11 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         jPanel2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, -1));
 
         btnVerEstudiantesRegistradosRegEst.setText("Ver Estudiantes Registrados");
+        btnVerEstudiantesRegistradosRegEst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerEstudiantesRegistradosRegEstActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnVerEstudiantesRegistradosRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, 310, 30));
 
         txtAreaRegEst.setColumns(20);
@@ -696,6 +738,11 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         jPanel2.add(comboBoxNivelRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 180, -1));
 
         btnRegistrarEstudianteRegEst.setText("Resgitrar Estudiante");
+        btnRegistrarEstudianteRegEst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarEstudianteRegEstActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnRegistrarEstudianteRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 190, 30));
 
         jLabel34.setText("_______________________________________________________________");
@@ -711,6 +758,11 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         jPanel2.add(btnModificarEstudianteRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 310, 30));
 
         btnAbrirEstudiantesRegEst.setText("Abrir Archivo Estudiantes");
+        btnAbrirEstudiantesRegEst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbrirEstudiantesRegEstActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnAbrirEstudiantesRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 490, 240, 30));
 
         btnGuardarEstudiantesRegEst.setText("Guardar Archivo Estudiantes");

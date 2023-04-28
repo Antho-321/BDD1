@@ -100,7 +100,7 @@ public class ArbolBB implements Serializable {
         } else {
             NodoABB aux = raiz;
             while (aux != null) {
-                int bandera = (((Reserva) aux.getInfo()).getLibro().getCodigo().compareTo(r.getLibro().getCodigo()));
+                int bandera = (((Reserva) aux.getInfo()).getCodigo().compareTo(r.getCodigo()));
                 if (bandera < 0) {
                     if (aux.gethDer() == null) {
                         aux.sethDer(nuevo);
@@ -166,6 +166,22 @@ public class ArbolBB implements Serializable {
             reserva = (Reserva) r.getInfo();
             res += reserva.toString() + "\n";
             res += InorderReserva(r.gethDer());
+        }
+        return res;
+    }
+    
+    
+    public String InorderReservaSub(NodoABB r,String cedula) {
+        String res = "";
+        Reserva reserva;
+        if (r != null) {
+            res += InorderReservaSub(r.gethIzq(),cedula);
+            reserva = (Reserva) r.getInfo();
+            String sub = reserva.getCodigo().substring(0, 10);
+            if (cedula.equals(sub)) {
+                res += reserva.toString() + "\n";
+            }
+            res += InorderReservaSub(r.gethDer(),cedula);
         }
         return res;
     }
@@ -266,7 +282,7 @@ public class ArbolBB implements Serializable {
 
     //BUSQUEDA DE UNA RESERVA
     public String getCodigoReserva(NodoABB nodo) {
-        return ((Reserva) nodo.getInfo()).getLibro().getCodigo();
+        return ((Reserva) nodo.getInfo()).getCodigo();
     }
 
     public NodoABB BusquedaReserva(String cod, NodoABB nodo) {
@@ -491,7 +507,7 @@ public class ArbolBB implements Serializable {
             } else {
                 if (aux.gethIzq() != null && aux.gethDer() != null) {//caso 2
                     NodoABB info = MenorDeMayores(aux.gethDer());//siempre va a ser hoja
-                    EliminarNodoReserva(((Reserva) info.getInfo()).getLibro().getCodigo(), aux, aux);//elimina el nodo repetido
+                    EliminarNodoReserva(((Reserva) info.getInfo()).getCodigo(), aux, aux);//elimina el nodo repetido
                     aux.setInfo(info.getInfo());
                 } else {
                     if (this.raiz != aux) {//caso 3
@@ -579,27 +595,26 @@ public class ArbolBB implements Serializable {
     }
     
     public int CompararReserva(String id, NodoABB A){
-        return id.compareTo(((Reserva) A.getInfo()).getLibro().getCodigo());
+        return id.compareTo(((Reserva) A.getInfo()).getCodigo());
     }
 
     //Métodos para generar el .text
-    public ListaLineal Niveles(ListaLineal lista) {
-        lista.Clear();
-        lista.IngresarInicio(this.raiz);
-        Nodo n = lista.getInicio();
-
-        while (n != null) {
-            if (((NodoABB) n.getInfo()).gethIzq() != null) {
-                lista.IngresarFinal(((NodoABB) n.getInfo()).gethIzq());
-            }
-            if (((NodoABB) n.getInfo()).gethDer() != null) {
-                lista.IngresarFinal(((NodoABB) n.getInfo()).gethDer());
-            }
-            n = n.getSig();
-
+   
+    //INORDER
+    public ListaLineal Niveles(NodoABB r,ListaLineal lista) {
+        NodoABB estudiante;
+        if (r != null) {
+            Niveles(r.gethIzq(), lista);
+            estudiante = r;
+            lista.IngresarFinal(estudiante);
+            Niveles(r.gethDer(),lista);
         }
-
         return lista;
+    }
+    
+    
+    public ListaLineal Niveles(ListaLineal lista){
+        return Niveles(this.raiz,lista);
     }
     ////////////////////PRUEBAAAAAAAAAAAAAAAAAAA///////////////////////////////////////////
 

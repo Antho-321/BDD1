@@ -5,15 +5,13 @@ import com.google.gson.GsonBuilder;
 import Estructura.ListaLineal;
 import Estructura.ArbolBB;
 import Estructura.NodoABB;
-import reserva.varios.Persona;
-import reserva.varios.Estudiante;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import javax.swing.JOptionPane;
-import reserva.varios.Libro;
+import reserva.varios.*;
 
 
 public class Serializador {
@@ -139,5 +137,65 @@ public class Serializador {
     public static void EscribirJson(PrintWriter pr,String s){
         pr.write(s+"\n");
     }
+    //Parte de Serialización de las reservas
+    public String SerializarReserva(String ruta, ListaLineal lista){
+        
+        try {
+            archivo = new File(ruta);
+        } catch (Exception e) {
+            return "Error al crear el archivo";
+        }
+        
+        Object a;
+        String jSonString = "";
+        
+        try (var pw = new PrintWriter(archivo)) {
+            
+            while(!lista.Vacia()){
+                a = (NodoABB)lista.Retirar().getInfo();
+                jSonString = TransformarJSon(gson, (Reserva)((NodoABB)a).getInfo());
+                EscribirJson(pw, jSonString);
+            }  
+        }catch (Exception e) {
+            return "Error al escribir el archivo";
+        }
+        
+        
+        JOptionPane.showMessageDialog(null, "Archivo guardado");
+        return "Serialización exitosa!";
+        
+    }
+    
+    public String DeserializarReserva(String ruta, ArbolBB arbol){
+        String stringJson = "";
+        String linea;
+        
+        try {
+            FileReader fileReader = new FileReader(ruta);
+            BufferedReader br = new BufferedReader(fileReader);
+            //System.out.println("Archivo encontrado");
+            JOptionPane.showMessageDialog(null, "Archivo Cargado");
+            Reserva lib;
+            while ((linea = br.readLine()) != null) {                
+                stringJson += linea;
+                if(linea.compareTo("}") == 0){
+                    lib = gson.fromJson(stringJson, Reserva.class);
+                    
+                    arbol.IngresarReserva(lib);
+                   
+                    stringJson = "";
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            return "Error";
+        }
+        return "Deserialización exitosa!";
+    }
+    
+    
+    
+    
+    
     
 }

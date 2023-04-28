@@ -11,10 +11,12 @@ package reserva.varios;
 public class Reserva {
     private Libro libro;
     private int cantidad;
+    private String Codigo;
     
-    public Reserva(Libro libro, int cant){
+    public Reserva(Libro libro, int cant,String codigo){
         this.libro = libro;
         this.cantidad= cant;
+        this.Codigo= codigo;
     }
 
     /**
@@ -50,5 +52,19 @@ public class Reserva {
     public String toString(){
         return "_______________________________________________________________________"+"\n"+
                 "Cantidad de libros poseidos: "+this.cantidad+"\n"+this.libro.toString();
+    }
+
+    /**
+     * @return the Codigo
+     */
+    public String getCodigo() {
+        return Codigo;
+    }
+
+    /**
+     * @param Codigo the Codigo to set
+     */
+    public void setCodigo(String Codigo) {
+        this.Codigo = Codigo;
     }
 }
