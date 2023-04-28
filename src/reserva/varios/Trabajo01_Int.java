@@ -244,14 +244,14 @@ public class Trabajo01_Int extends javax.swing.JFrame {
             int añoEdicion = Integer.parseInt(txtAñoEdicionRegLibro.getText());
             int numeroCopias = Integer.parseInt(txtNumeroCopiasRegLibro.getText());
             int numeroDisponibles = Integer.parseInt(txtNumeroDisponiblesRegLibro.getText());
-            if(!(añoEdicion>=1960&&añoEdicion<=2023)){
+            if(!(añoEdicion>=1000&&añoEdicion<=2023)){
                 throw new NumberFormatException("añoInv");
             }
             if(numeroDisponibles<1){
-                throw new NumberFormatException("menor");
+                throw new NumberFormatException("menor1");
             }
-            if(numeroCopias<=48){
-                throw new NumberFormatException("menor");
+            if(numeroCopias<=14){
+                throw new NumberFormatException("menor14");
             }
             String codigo = generarCodigoLibro(nombre, añoEdicion, numeroCopias);
 
@@ -270,8 +270,11 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             String msj=e.getMessage();
             switch(msj){
-                case "menor":
-                    JOptionPane.showMessageDialog(null, "Por favor ingrese cantidades válidas");
+                case "menor1":
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese un número disponible mayor que cero");
+                    break;
+                case "menor14":
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese un número de copias mayor o igual a 15");
                     break;
                 case "añoInv":
                     JOptionPane.showMessageDialog(null, "Por favor ingrese un año de edición válido");
