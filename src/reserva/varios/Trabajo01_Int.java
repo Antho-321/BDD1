@@ -1,6 +1,5 @@
  package reserva.varios;
 
-import java.util.Date;
 import javax.swing.JOptionPane;
 import Estructura.*;
 import Serializacion.*;
@@ -83,7 +82,6 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     public void ingresarEstudiante() {
         String nombre = null;
         String apellido = null;
-
         String carrera = (String) comboBoxCarreraRegEst.getSelectedItem();
         int nivel = Integer.parseInt((String) comboBoxNivelRegEst.getSelectedItem());
 
@@ -281,6 +279,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     //Método para generar código en un libro
     public String generarCodigoLibro(String nombre, int año, int numCopias) {
         String cod = nombre.substring(0, 2);
+        cod += nombre.substring(nombre.length()-3, nombre.length());
         return cod + año + numCopias;
     }
 
@@ -563,10 +562,45 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel54 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        txtCedulaResLibro1 = new javax.swing.JTextField();
+        jLabel55 = new javax.swing.JLabel();
+        btnVerificarEstudianteResLibro1 = new javax.swing.JButton();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        txtAreaDatosEstudianteResLibro1 = new javax.swing.JTextArea();
+        jLabel56 = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
+        jLabel58 = new javax.swing.JLabel();
+        txtCodLibroResLibro1 = new javax.swing.JTextField();
+        btnBuscarLibroResLibro1 = new javax.swing.JButton();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        txtAreaDatosLibrosResLibro1 = new javax.swing.JTextArea();
+        jLabel59 = new javax.swing.JLabel();
+        comboBoxCantidadLibrosResLibro1 = new javax.swing.JComboBox<>();
+        btnReservarLibroResLibro1 = new javax.swing.JButton();
+        btnDevolverLibroResLibro1 = new javax.swing.JButton();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        txtAreaResLibro1 = new javax.swing.JTextArea();
+        jLabel60 = new javax.swing.JLabel();
+        cboxCatLibro1 = new javax.swing.JComboBox<>();
+        jLabel61 = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         btnVerEstudiantesRegistradosRegEst = new javax.swing.JButton();
@@ -631,7 +665,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
-        cboxCatLibro = new javax.swing.JComboBox<>();
+        cboxCatLibroResLibro = new javax.swing.JComboBox<>();
         jLabel37 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         txtAreaResLibro = new javax.swing.JTextArea();
@@ -650,27 +684,171 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         jLabel42 = new javax.swing.JLabel();
         comboBoxCantidadLibrosResLibro = new javax.swing.JComboBox<>();
         btnReservarLibroResLibro = new javax.swing.JButton();
-        btnDevolverLibroResLibro = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel62 = new javax.swing.JLabel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        txtAreaDatosEstudianteDevLibro2 = new javax.swing.JTextArea();
+        btnVerificarEstudianteDevLibro = new javax.swing.JButton();
+        txtCedulaDevLibro = new javax.swing.JTextField();
+        jLabel64 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel65 = new javax.swing.JLabel();
+        txtCodLibroDevLibro = new javax.swing.JTextField();
+        btnBuscarLibroDevLibro2 = new javax.swing.JButton();
+        jLabel68 = new javax.swing.JLabel();
+        jScrollPane15 = new javax.swing.JScrollPane();
+        txtAreaDatosLibrosDevLibro2 = new javax.swing.JTextArea();
+        comboBoxCantidadLibrosDevLibro = new javax.swing.JComboBox<>();
+        jLabel69 = new javax.swing.JLabel();
+        btnDevolverLibroDevLibro2 = new javax.swing.JButton();
+
+        jLabel54.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel54.setText("Reservar Libros");
+
+        jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel23.setText("Buscar Estudiante");
+
+        jLabel55.setText("Cédula");
+
+        btnVerificarEstudianteResLibro1.setText("Verificar Estudiante");
+        btnVerificarEstudianteResLibro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificarEstudianteResLibro1ActionPerformed(evt);
+            }
+        });
+
+        txtAreaDatosEstudianteResLibro1.setColumns(20);
+        txtAreaDatosEstudianteResLibro1.setRows(5);
+        jScrollPane10.setViewportView(txtAreaDatosEstudianteResLibro1);
+
+        jLabel56.setText("__________________________________________________________________");
+
+        jLabel57.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel57.setText("Buscar Libro");
+
+        jLabel58.setText("Codigo del Libro");
+
+        btnBuscarLibroResLibro1.setText("Buscar Libro");
+        btnBuscarLibroResLibro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarLibroResLibro1ActionPerformed(evt);
+            }
+        });
+
+        txtAreaDatosLibrosResLibro1.setColumns(20);
+        txtAreaDatosLibrosResLibro1.setRows(5);
+        jScrollPane11.setViewportView(txtAreaDatosLibrosResLibro1);
+
+        jLabel59.setText("Cantidad de Libros");
+
+        comboBoxCantidadLibrosResLibro1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+
+        btnReservarLibroResLibro1.setText("Reservar Libro");
+        btnReservarLibroResLibro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReservarLibroResLibro1ActionPerformed(evt);
+            }
+        });
+
+        btnDevolverLibroResLibro1.setText("Devolver Libro");
+        btnDevolverLibroResLibro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDevolverLibroResLibro1ActionPerformed(evt);
+            }
+        });
+
+        txtAreaResLibro1.setColumns(20);
+        txtAreaResLibro1.setRows(5);
+        jScrollPane12.setViewportView(txtAreaResLibro1);
+
+        jLabel60.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel60.setText("Categoría");
+
+        cboxCatLibro1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mostrar Todos", "Romance", "Ficción", "Comedia", "Ciencia", "Drama" }));
+        cboxCatLibro1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboxCatLibro1ItemStateChanged(evt);
+            }
+        });
+
+        jLabel61.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel61.setText("Libros Disponibles");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTabbedPane2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTabbedPane2.setForeground(new java.awt.Color(102, 102, 102));
 
+        jPanel1.setBackground(new java.awt.Color(234, 236, 238));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Eras Bold ITC", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Eras Bold ITC", 1, 40)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(41, 128, 185));
         jLabel2.setText("Bienvenido");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(22, 160, 133));
-        jLabel1.setText("Este es un sistema diseñado para ayudar a la gestión de reserva y devolución de libros hecho para estudiantes.");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 400, -1, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/books.png"))); // NOI18N
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Eras Bold ITC", 0, 20)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(58, 189, 76));
+        jLabel15.setText("modificación de tanto libros como estudiantes.");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Eras Bold ITC", 0, 20)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(58, 189, 76));
+        jLabel17.setText("cada una realiza las funciones antes descritas.");
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
+
+        jLabel19.setFont(new java.awt.Font("Eras Bold ITC", 0, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(235, 152, 78));
+        jLabel19.setText("•   Rosero Jorge");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
+
+        jLabel20.setFont(new java.awt.Font("Eras Bold ITC", 0, 18)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(235, 152, 78));
+        jLabel20.setText("Proyecto realizado por:");
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
+
+        jLabel21.setFont(new java.awt.Font("Eras Bold ITC", 0, 18)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(235, 152, 78));
+        jLabel21.setText("•   de la Cruz Brayan");
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
+
+        jLabel22.setFont(new java.awt.Font("Eras Bold ITC", 0, 18)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(235, 152, 78));
+        jLabel22.setText("•   Luna Anthony");
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, -1, -1));
+
+        jLabel25.setFont(new java.awt.Font("Eras Bold ITC", 0, 20)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(58, 189, 76));
+        jLabel25.setText("de libros hecho para estudiantes.");
+        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+
+        jLabel29.setFont(new java.awt.Font("Eras Bold ITC", 0, 20)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(58, 189, 76));
+        jLabel29.setText("Este es un sistema diseñado para ayudar a la gestión de reserva y devolución de ");
+        jPanel1.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        jLabel30.setFont(new java.awt.Font("Eras Bold ITC", 0, 20)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(58, 189, 76));
+        jLabel30.setText("El cual cuenta con las funciones de registro, edición y  ");
+        jPanel1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+
+        jLabel31.setFont(new java.awt.Font("Eras Bold ITC", 0, 20)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(58, 189, 76));
+        jLabel31.setText("En la parte superior se encuentran las ventanas donde ");
+        jPanel1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
 
         jTabbedPane2.addTab("Home", jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(240, 230, 140));
+        jPanel2.setForeground(new java.awt.Color(222, 184, 135));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -737,7 +915,10 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         comboBoxNivelRegEst.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8" }));
         jPanel2.add(comboBoxNivelRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 180, -1));
 
-        btnRegistrarEstudianteRegEst.setText("Resgitrar Estudiante");
+
+        btnRegistrarEstudianteRegEst.setText("Registrar Estudiante");
+
+
         btnRegistrarEstudianteRegEst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarEstudianteRegEstActionPerformed(evt);
@@ -773,8 +954,10 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         });
         jPanel2.add(btnGuardarEstudiantesRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 490, 250, 30));
 
+
         jTabbedPane2.addTab("Registrar Estudiantes", jPanel2);
 
+        jPanel3.setBackground(new java.awt.Color(217, 196, 245));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -817,7 +1000,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         jLabel51.setText("Número de Disponibles");
         jPanel3.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
 
-        btnRegistrarLibroRegLibro.setText("Resgitrar Libro");
+        btnRegistrarLibroRegLibro.setText("Registrar Libro");
         btnRegistrarLibroRegLibro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarLibroRegLibroActionPerformed(evt);
@@ -888,6 +1071,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Registrar Libros", jPanel3);
 
+        jPanel4.setBackground(new java.awt.Color(182, 250, 191));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -902,13 +1086,13 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         jLabel36.setText("Categoría");
         jPanel4.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, -1, -1));
 
-        cboxCatLibro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mostrar Todos", "Romance", "Ficción", "Comedia", "Ciencia", "Drama" }));
-        cboxCatLibro.addItemListener(new java.awt.event.ItemListener() {
+        cboxCatLibroResLibro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mostrar Todos", "Romance", "Ficción", "Comedia", "Ciencia", "Drama" }));
+        cboxCatLibroResLibro.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cboxCatLibroItemStateChanged(evt);
+                cboxCatLibroResLibroItemStateChanged(evt);
             }
         });
-        jPanel4.add(cboxCatLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, -1, -1));
+        jPanel4.add(cboxCatLibroResLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, -1, -1));
 
         jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel37.setText("Libros Disponibles");
@@ -977,15 +1161,74 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         });
         jPanel4.add(btnReservarLibroResLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 490, 230, 30));
 
-        btnDevolverLibroResLibro.setText("Devolver Libro");
-        btnDevolverLibroResLibro.addActionListener(new java.awt.event.ActionListener() {
+        jTabbedPane2.addTab("Reservar Libros", jPanel4);
+
+        jPanel5.setBackground(new java.awt.Color(237, 209, 197));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel62.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel62.setText("Buscar Libro");
+        jPanel5.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, -1, -1));
+
+        txtAreaDatosEstudianteDevLibro2.setColumns(20);
+        txtAreaDatosEstudianteDevLibro2.setRows(5);
+        jScrollPane13.setViewportView(txtAreaDatosEstudianteDevLibro2);
+
+        jPanel5.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 350, 130));
+
+        btnVerificarEstudianteDevLibro.setText("Verificar Estudiante");
+        btnVerificarEstudianteDevLibro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDevolverLibroResLibroActionPerformed(evt);
+                btnVerificarEstudianteDevLibroActionPerformed(evt);
             }
         });
-        jPanel4.add(btnDevolverLibroResLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 490, 230, 30));
+        jPanel5.add(btnVerificarEstudianteDevLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 160, 30));
+        jPanel5.add(txtCedulaDevLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 250, -1));
 
-        jTabbedPane2.addTab("Reservar Libros", jPanel4);
+        jLabel64.setText("Cédula");
+        jPanel5.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+
+        jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel24.setText("Buscar Estudiante");
+        jPanel5.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
+
+        jLabel65.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel65.setText("Devolver Libros");
+        jPanel5.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
+        jPanel5.add(txtCodLibroDevLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 200, -1));
+
+        btnBuscarLibroDevLibro2.setText("Buscar Libro");
+        btnBuscarLibroDevLibro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarLibroDevLibro2ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnBuscarLibroDevLibro2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, 140, 30));
+
+        jLabel68.setText("Codigo del Libro");
+        jPanel5.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, -1, -1));
+
+        txtAreaDatosLibrosDevLibro2.setColumns(20);
+        txtAreaDatosLibrosDevLibro2.setRows(5);
+        jScrollPane15.setViewportView(txtAreaDatosLibrosDevLibro2);
+
+        jPanel5.add(jScrollPane15, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, 350, 130));
+
+        comboBoxCantidadLibrosDevLibro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        jPanel5.add(comboBoxCantidadLibrosDevLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, -1, -1));
+
+        jLabel69.setText("Cantidad de Libros");
+        jPanel5.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
+
+        btnDevolverLibroDevLibro2.setText("Devolver Libro");
+        btnDevolverLibroDevLibro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDevolverLibroDevLibro2ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnDevolverLibroDevLibro2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 230, 30));
+
+        jTabbedPane2.addTab("Devolver Libros", jPanel5);
 
         getContentPane().add(jTabbedPane2, java.awt.BorderLayout.PAGE_START);
 
@@ -1054,24 +1297,14 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         txtAreaRegLibro.setText(verificarLibro(txtCodLibro.getText()));
     }//GEN-LAST:event_btnVerificarLibroRegLibroActionPerformed
 
-    private void btnReservarLibroResLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarLibroResLibroActionPerformed
-        // TODO add your handling code here:
-        reservar();
-    }//GEN-LAST:event_btnReservarLibroResLibroActionPerformed
-
-    private void btnDevolverLibroResLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverLibroResLibroActionPerformed
-        // TODO add your handling code here:
-        devolver();
-    }//GEN-LAST:event_btnDevolverLibroResLibroActionPerformed
-
     
     
-    private void cboxCatLibroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxCatLibroItemStateChanged
+    private void cboxCatLibroResLibroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxCatLibroResLibroItemStateChanged
         // TODO add your handling code here:
 
-        String item = (String) cboxCatLibro.getSelectedItem(); // get the selected item as an Object
+        String item = (String) cboxCatLibroResLibro.getSelectedItem(); // get the selected item as an Object
         reporteLibrosParametrico(item);
-    }//GEN-LAST:event_cboxCatLibroItemStateChanged
+    }//GEN-LAST:event_cboxCatLibroResLibroItemStateChanged
 
     private void btnAbrirEstudiantesRegEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirEstudiantesRegEstActionPerformed
         // TODO add your handling code here:
@@ -1093,6 +1326,43 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         guardarLibros();
     }//GEN-LAST:event_btnGuardarLibrosRedLibroActionPerformed
 
+    private void btnVerificarEstudianteResLibro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarEstudianteResLibro1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerificarEstudianteResLibro1ActionPerformed
+
+    private void btnBuscarLibroResLibro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLibroResLibro1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarLibroResLibro1ActionPerformed
+
+    private void btnReservarLibroResLibro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarLibroResLibro1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReservarLibroResLibro1ActionPerformed
+
+    private void btnDevolverLibroResLibro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverLibroResLibro1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDevolverLibroResLibro1ActionPerformed
+
+    private void cboxCatLibro1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxCatLibro1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboxCatLibro1ItemStateChanged
+
+    private void btnVerificarEstudianteDevLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarEstudianteDevLibroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerificarEstudianteDevLibroActionPerformed
+
+    private void btnBuscarLibroDevLibro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLibroDevLibro2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarLibroDevLibro2ActionPerformed
+
+    private void btnDevolverLibroDevLibro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverLibroDevLibro2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDevolverLibroDevLibro2ActionPerformed
+
+    private void btnReservarLibroResLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarLibroResLibroActionPerformed
+        // TODO add your handling code here:
+        reservar();
+    }//GEN-LAST:event_btnReservarLibroResLibroActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1105,8 +1375,11 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbrirEstudiantesRegEst;
     private javax.swing.JButton btnAbrirLibrosRegLibro;
+    private javax.swing.JButton btnBuscarLibroDevLibro2;
     private javax.swing.JButton btnBuscarLibroResLibro;
-    private javax.swing.JButton btnDevolverLibroResLibro;
+    private javax.swing.JButton btnBuscarLibroResLibro1;
+    private javax.swing.JButton btnDevolverLibroDevLibro2;
+    private javax.swing.JButton btnDevolverLibroResLibro1;
     private javax.swing.JButton btnEliminarEstudianteRegEst;
     private javax.swing.JButton btnEliminarLibroRegLibro;
     private javax.swing.JButton btnGuardarEstudiantesRegEst;
@@ -1116,13 +1389,19 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrarEstudianteRegEst;
     private javax.swing.JButton btnRegistrarLibroRegLibro;
     private javax.swing.JButton btnReservarLibroResLibro;
+    private javax.swing.JButton btnReservarLibroResLibro1;
     private javax.swing.JButton btnVerEstudiantesRegistradosRegEst;
     private javax.swing.JButton btnVerLibrosRegistradosRegLibro;
+    private javax.swing.JButton btnVerificarEstudianteDevLibro;
     private javax.swing.JButton btnVerificarEstudianteRegEst;
     private javax.swing.JButton btnVerificarEstudianteResLibro;
+    private javax.swing.JButton btnVerificarEstudianteResLibro1;
     private javax.swing.JButton btnVerificarLibroRegLibro;
-    private javax.swing.JComboBox<String> cboxCatLibro;
+    private javax.swing.JComboBox<String> cboxCatLibro1;
+    private javax.swing.JComboBox<String> cboxCatLibroResLibro;
+    private javax.swing.JComboBox<String> comboBoxCantidadLibrosDevLibro;
     private javax.swing.JComboBox<String> comboBoxCantidadLibrosResLibro;
+    private javax.swing.JComboBox<String> comboBoxCantidadLibrosResLibro1;
     private javax.swing.JComboBox<String> comboBoxCarreraRegEst;
     private javax.swing.JComboBox<String> comboBoxCategoriaRegLibro;
     private javax.swing.JComboBox<String> comboBoxMateriaRegLibro;
@@ -1133,10 +1412,23 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
@@ -1154,11 +1446,25 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel64;
+    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1166,6 +1472,12 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
@@ -1173,18 +1485,27 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField txtApellidoRegEst;
+    private javax.swing.JTextArea txtAreaDatosEstudianteDevLibro2;
     private javax.swing.JTextArea txtAreaDatosEstudianteResLibro;
+    private javax.swing.JTextArea txtAreaDatosEstudianteResLibro1;
+    private javax.swing.JTextArea txtAreaDatosLibrosDevLibro2;
     private javax.swing.JTextArea txtAreaDatosLibrosResLibro;
+    private javax.swing.JTextArea txtAreaDatosLibrosResLibro1;
     private javax.swing.JTextArea txtAreaRegEst;
     private javax.swing.JTextArea txtAreaRegLibro;
     private javax.swing.JTextArea txtAreaResLibro;
+    private javax.swing.JTextArea txtAreaResLibro1;
     private javax.swing.JTextField txtAutorRegLibro;
     private javax.swing.JTextField txtAñoEdicionRegLibro;
     private javax.swing.JTextField txtAñoRegEst;
+    private javax.swing.JTextField txtCedulaDevLibro;
     private javax.swing.JTextField txtCedulaRegEst;
     private javax.swing.JTextField txtCedulaResLibro;
+    private javax.swing.JTextField txtCedulaResLibro1;
     private javax.swing.JTextField txtCodLibro;
+    private javax.swing.JTextField txtCodLibroDevLibro;
     private javax.swing.JTextField txtCodLibroResLibro;
+    private javax.swing.JTextField txtCodLibroResLibro1;
     private javax.swing.JTextField txtDiaRegEst;
     private javax.swing.JTextField txtMesRegEst;
     private javax.swing.JTextField txtNombreRegEst;
