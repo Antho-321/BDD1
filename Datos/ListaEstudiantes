@@ -1,0 +1,48 @@
+{
+  "carrera": "Ing. Software",
+  "nivel": 1,
+  "cedula": "1002003000",
+  "nombre": "Ricardo",
+  "apellido": "Milo",
+  "fechaNacimiento": {
+    "día": 1,
+    "mes": 1,
+    "año": 2000
+  }
+}
+{
+  "carrera": "Ing. Textil",
+  "nivel": 8,
+  "cedula": "1002120028",
+  "nombre": "Esteban",
+  "apellido": "Dido",
+  "fechaNacimiento": {
+    "día": 1,
+    "mes": 12,
+    "año": 1999
+  }
+}
+{
+  "carrera": "Ing. Software",
+  "nivel": 1,
+  "cedula": "1003962824",
+  "nombre": "Jorge",
+  "apellido": "Rosero",
+  "fechaNacimiento": {
+    "día": 24,
+    "mes": 8,
+    "año": 2002
+  }
+}
+{
+  "carrera": "Ing. Software",
+  "nivel": 1,
+  "cedula": "1050298650",
+  "nombre": "Anthony",
+  "apellido": "Luna",
+  "fechaNacimiento": {
+    "día": 1,
+    "mes": 1,
+    "año": 2000
+  }
+}

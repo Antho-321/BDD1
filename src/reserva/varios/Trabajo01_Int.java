@@ -442,10 +442,10 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     //Devolver libro
     public void devolver() {
         String codigo, cedula;
-        codigo = txtCodLibroResLibro.getText();
-        cedula = txtCedulaResLibro.getText();
+        codigo = txtCodLibroDevLibro.getText();
+        cedula = txtCedulaDevLibro.getText();
         String codigof= cedula+codigo;
-        int requeridos = Integer.parseInt((String) comboBoxCantidadLibrosResLibro.getSelectedItem());
+        int requeridos = Integer.parseInt((String) comboBoxCantidadLibrosDevLibro.getSelectedItem());
         Estudiante e;
         Libro l;
         Reserva r;
@@ -711,7 +711,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel62 = new javax.swing.JLabel();
         jScrollPane13 = new javax.swing.JScrollPane();
-        txtAreaDatosEstudianteDevLibro2 = new javax.swing.JTextArea();
+        txtAreaDatosEstudianteDevLibro = new javax.swing.JTextArea();
         btnVerificarEstudianteDevLibro = new javax.swing.JButton();
         txtCedulaDevLibro = new javax.swing.JTextField();
         jLabel64 = new javax.swing.JLabel();
@@ -721,7 +721,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         btnBuscarLibroDevLibro2 = new javax.swing.JButton();
         jLabel68 = new javax.swing.JLabel();
         jScrollPane15 = new javax.swing.JScrollPane();
-        txtAreaDatosLibrosDevLibro2 = new javax.swing.JTextArea();
+        txtAreaDatosLibrosDevLibro = new javax.swing.JTextArea();
         comboBoxCantidadLibrosDevLibro = new javax.swing.JComboBox<>();
         jLabel69 = new javax.swing.JLabel();
         btnDevolverLibroDevLibro2 = new javax.swing.JButton();
@@ -1195,9 +1195,9 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         jLabel62.setText("Buscar Libro");
         jPanel5.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, -1, -1));
 
-        txtAreaDatosEstudianteDevLibro2.setColumns(20);
-        txtAreaDatosEstudianteDevLibro2.setRows(5);
-        jScrollPane13.setViewportView(txtAreaDatosEstudianteDevLibro2);
+        txtAreaDatosEstudianteDevLibro.setColumns(20);
+        txtAreaDatosEstudianteDevLibro.setRows(5);
+        jScrollPane13.setViewportView(txtAreaDatosEstudianteDevLibro);
 
         jPanel5.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 350, 130));
 
@@ -1233,9 +1233,9 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         jLabel68.setText("Codigo del Libro");
         jPanel5.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, -1, -1));
 
-        txtAreaDatosLibrosDevLibro2.setColumns(20);
-        txtAreaDatosLibrosDevLibro2.setRows(5);
-        jScrollPane15.setViewportView(txtAreaDatosLibrosDevLibro2);
+        txtAreaDatosLibrosDevLibro.setColumns(20);
+        txtAreaDatosLibrosDevLibro.setRows(5);
+        jScrollPane15.setViewportView(txtAreaDatosLibrosDevLibro);
 
         jPanel5.add(jScrollPane15, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, 350, 130));
 
@@ -1373,14 +1373,18 @@ public class Trabajo01_Int extends javax.swing.JFrame {
 
     private void btnVerificarEstudianteDevLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarEstudianteDevLibroActionPerformed
         // TODO add your handling code here:
+        String librosEstudiante = listaLibrosEstudiante();
+        txtAreaDatosEstudianteDevLibro.setText(verificarEstudiantes(txtCedulaDevLibro.getText()) + librosEstudiante);
     }//GEN-LAST:event_btnVerificarEstudianteDevLibroActionPerformed
 
     private void btnBuscarLibroDevLibro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLibroDevLibro2ActionPerformed
         // TODO add your handling code here:
+        txtAreaDatosLibrosDevLibro.setText(verificarLibro(txtCodLibroDevLibro.getText()));
     }//GEN-LAST:event_btnBuscarLibroDevLibro2ActionPerformed
 
     private void btnDevolverLibroDevLibro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverLibroDevLibro2ActionPerformed
         // TODO add your handling code here:
+        devolver();
     }//GEN-LAST:event_btnDevolverLibroDevLibro2ActionPerformed
 
     private void btnReservarLibroResLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarLibroResLibroActionPerformed
@@ -1515,10 +1519,10 @@ public class Trabajo01_Int extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField txtApellidoRegEst;
-    private javax.swing.JTextArea txtAreaDatosEstudianteDevLibro2;
+    private javax.swing.JTextArea txtAreaDatosEstudianteDevLibro;
     private javax.swing.JTextArea txtAreaDatosEstudianteResLibro;
     private javax.swing.JTextArea txtAreaDatosEstudianteResLibro1;
-    private javax.swing.JTextArea txtAreaDatosLibrosDevLibro2;
+    private javax.swing.JTextArea txtAreaDatosLibrosDevLibro;
     private javax.swing.JTextArea txtAreaDatosLibrosResLibro;
     private javax.swing.JTextArea txtAreaDatosLibrosResLibro1;
     private javax.swing.JTextArea txtAreaRegEst;

@@ -1,0 +1,36 @@
+{
+  "categoria": "Ficción",
+  "codigo": "Docha160515",
+  "nombre": "Don Quijote de la Mancha",
+  "autor": "Miguel de Cervantes",
+  "editorial": "Entretenimiento",
+  "materia": "Entretenimiento",
+  "añoEdicion": 1605,
+  "numeroCopias": 15,
+  "numeroPrestamos": 3,
+  "numeroDisponibles": 12
+}
+{
+  "categoria": "Ficción",
+  "codigo": "Elito194315",
+  "nombre": "El principito",
+  "autor": "Antoine de Saint",
+  "editorial": "Literatura",
+  "materia": "Literatura",
+  "añoEdicion": 1943,
+  "numeroCopias": 15,
+  "numeroPrestamos": 0,
+  "numeroDisponibles": 15
+}
+{
+  "categoria": "Ficción",
+  "codigo": "Hides185915",
+  "nombre": "Historia de dos ciudades",
+  "autor": "Charles Dickens",
+  "editorial": "Entretenimiento",
+  "materia": "Entretenimiento",
+  "añoEdicion": 1859,
+  "numeroCopias": 15,
+  "numeroPrestamos": 0,
+  "numeroDisponibles": 15
+}
