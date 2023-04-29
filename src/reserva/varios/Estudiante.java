@@ -5,6 +5,7 @@ import Estructura.ArbolBB;
 public class Estudiante extends Persona{
     private String carrera;
     private int nivel;
+    
     public Estudiante() {
         super();
     }

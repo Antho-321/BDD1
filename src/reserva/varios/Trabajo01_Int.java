@@ -959,9 +959,19 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         jPanel2.add(btnVerificarEstudianteRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 310, 30));
 
         btnEliminarEstudianteRegEst.setText("Eliminar Estudiante");
+        btnEliminarEstudianteRegEst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarEstudianteRegEstActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnEliminarEstudianteRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 310, 30));
 
         btnModificarEstudianteRegEst.setText("Modificar Estudiante");
+        btnModificarEstudianteRegEst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarEstudianteRegEstActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnModificarEstudianteRegEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 310, 30));
 
         btnAbrirEstudiantesRegEst.setText("Abrir Archivo Estudiantes");
