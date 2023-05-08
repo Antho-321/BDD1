@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import reserva.varios.*;
 
 public class ArbolBB implements Serializable {
-
+    private NodoABB raiz;
     //Auxiliar pa eliminar
     private int profundidad = 0;
     //Auxiliar para el .text
@@ -24,7 +24,7 @@ public class ArbolBB implements Serializable {
     public void setRaiz(NodoABB raiz) {
         this.raiz = raiz;
     }
-    private NodoABB raiz;
+    
 
     //Constructor
     public ArbolBB() {
@@ -63,13 +63,15 @@ public class ArbolBB implements Serializable {
     //METODO PARA INGRESAR UN LIBRO 
     public void Ingresar(Libro p) {
         NodoABB nuevo = new NodoABB(p);
-
         if (this.raiz == null) {
             this.raiz = nuevo;
         } else {
             NodoABB aux = raiz;
             while (aux != null) {
+                System.out.println(aux.getInfo());
+                
                 int bandera = (((Libro) aux.getInfo()).getCodigo().compareTo(p.getCodigo()));
+                System.out.println("222");
                 if (bandera < 0) {
                     if (aux.gethDer() == null) {
                         aux.sethDer(nuevo);

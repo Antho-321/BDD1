@@ -5,6 +5,9 @@ import com.google.gson.GsonBuilder;
 import Estructura.ListaLineal;
 import Estructura.ArbolBB;
 import Estructura.NodoABB;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import reserva.varios.Persona;
 import reserva.varios.Estudiante;
 import java.io.BufferedReader;
@@ -12,6 +15,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 import reserva.varios.Libro;
 
@@ -150,19 +157,24 @@ public class Serializador {
         String linea;
         
         try {
-            FileReader fileReader = new FileReader(ruta);
-            BufferedReader br = new BufferedReader(fileReader);
-            //System.out.println("Archivo encontrado");
-            String[] lib;
-            while ((linea = br.readLine()) != null) {                
-                stringJson += linea;
-                if(linea.compareTo("}") == 0){
-                    lib = gson.fromJson(stringJson, String[].class);
-                    
-                    arbol.Ingresar(lib);
-                    stringJson = "";
-                }
-            }
+            Reader reader = Files.newBufferedReader(Paths.get(ruta));
+
+// Leer el archivo JSON como un elemento genérico
+JsonElement element = gson.fromJson(reader, JsonElement.class);
+
+// Cerrar el lector
+reader.close();
+
+// Obtener el arreglo JSON de cadenas
+JsonArray array = element.getAsJsonArray();
+
+// Convertir el arreglo JSON de cadenas en un arreglo de objetos String
+String[] items = gson.fromJson(array, String[].class);
+
+// Imprimir el contenido del arreglo de objetos String
+System.out.println(Arrays.toString(items));
+
+arbol.Ingresar(items);
         } catch (Exception e) {
             System.out.println(e);
             return false;

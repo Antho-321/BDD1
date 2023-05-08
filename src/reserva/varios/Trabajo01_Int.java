@@ -82,7 +82,6 @@ public class Trabajo01_Int extends javax.swing.JFrame {
                     rutaInicial = fcMenu.getSelectedFile().getAbsolutePath();
                     new File(rutaInicial).mkdir();
                     rutaArchivo = rutaInicial + "\\Estudiantes";
-                    //System.out.println(listaEstudiantes.tamaño(listaEstudiantes.getRaiz()));
                     if(listaEstudiantes.tamaño(listaEstudiantes.getRaiz())!=0){
                         listaEstudiantes.Niveles(listaNiveles);
                         if(serializador.SerializarEstudiante(rutaArchivo, listaNiveles)){
@@ -124,7 +123,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
             res += Posorder(r.gethIzq());
             res += Posorder(r.gethDer());
             str = (String[]) r.getInfo();
-            reservar(str[0],str[1]);
+            reservar(str[0],str[1],str[2]);
             res += str.toString() + "\n";
         }
         return res;
@@ -480,27 +479,34 @@ public class Trabajo01_Int extends javax.swing.JFrame {
 
     //ESTA ES LA PARTE DE METODOS PARA EL MEDIO DE REDSERVA
     //Reservar libro
-    public void reservar(String codigo, String cedula) {
-        int requeridos = Integer.parseInt((String) comboBoxCantidadLibrosResLibro.getSelectedItem());
+    public void reservar(String codigo, String cedula, String r) {
+        int requeridos = Integer.parseInt(r);
+
         Estudiante e;
         Libro l, l2;
         try {
             e = (Estudiante) listaEstudiantes.Busqueda(cedula).getInfo();
             l = (Libro) listaLibros.Busquedal(codigo).getInfo();
-            if (l.getNumeroDisponibles() > requeridos && e.getLibrosEstudiante().Busquedal(codigo) == null) {
+            if (l.getNumeroDisponibles() > requeridos) {
                 //Se le asigna la cantidad de libros reservados
+                
                 l2 = (Libro) l.clone();
+                
                 l2.setNumeroDisponibles(requeridos);
+                
                 l2.setNumeroPrestamos(requeridos);
                 ///////////////////////////////////////////////
                 l.setNumeroDisponibles(l.getNumeroDisponibles() - requeridos);
                 l.setNumeroPrestamos(+requeridos);
+                e.getLibrosEstudiante().setRaiz(null);
                 e.getLibrosEstudiante().Ingresar(l2);
                 JOptionPane.showMessageDialog(null, "Libro reservado correctamente!!!");
             } else {
                 JOptionPane.showMessageDialog(null, "No existen copias suficientes disponibles, o ya reservó este libro");
             }
-        } catch (Exception ext) {
+        } 
+        catch (Exception ext) {
+            System.out.println(ext);
             JOptionPane.showMessageDialog(null, "Fallo en la operación, ingrese y verifique bien los campos, asegurese que el libro este disponible");
         }
 
@@ -560,9 +566,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
             fcMenu.showSaveDialog(fcMenu);
             this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
             listaEstudiantes.Niveles(listaNiveles);
-            System.out.println(serializador.SerializarEstudiante(rutaArchivo, listaNiveles));
         } catch (Exception e) {
-            System.out.println(e);
         }
     }
 
@@ -577,7 +581,6 @@ public class Trabajo01_Int extends javax.swing.JFrame {
                 serializador.DeserializarEstudiante(rutaArchivo, listaEstudiantes);
             }
         } catch (Exception e) {
-            System.out.println(e);
         }
     }
 
@@ -587,9 +590,7 @@ public class Trabajo01_Int extends javax.swing.JFrame {
             fcMenu.showSaveDialog(fcMenu);
             this.rutaArchivo = fcMenu.getSelectedFile().getAbsolutePath();
             listaLibros.Niveles(listaNiveles);
-            System.out.println(serializador.SerializarLibro(rutaArchivo, listaNiveles));
         } catch (Exception e) {
-            System.out.println(e);
         }
     }
 
@@ -604,7 +605,6 @@ public class Trabajo01_Int extends javax.swing.JFrame {
                 serializador.DeserializarLibro(rutaArchivo, listaLibros);
             }
         } catch (Exception e) {
-            System.out.println(e);
         }
     }
 
@@ -1066,9 +1066,9 @@ public class Trabajo01_Int extends javax.swing.JFrame {
         // TODO add your handling code here:
         String codigo=txtCodLibroResLibro.getText();
         String cedula=txtCedulaResLibro.getText();
-        reservar(codigo,cedula);
+        reservar(codigo,cedula, ((String) comboBoxCantidadLibrosResLibro.getSelectedItem()));
         listaReservas.setRaiz(null);
-        String[] reserva = {codigo, cedula};
+        String[] reserva = {codigo, cedula, ((String) comboBoxCantidadLibrosResLibro.getSelectedItem())};
         listaReservas.Ingresar(reserva);
     }//GEN-LAST:event_btnReservarLibroResLibroActionPerformed
 
