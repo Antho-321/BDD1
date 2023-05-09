@@ -48,6 +48,32 @@ public class Serializador {
         
     }
     
+    public String SerializarReservas(String ruta, ListaLineal lista){
+        
+        try {
+            archivo = new File(ruta);
+        } catch (Exception e) {
+            return "Error al crear el archivo";
+        }
+        
+        Object a;
+        String jSonString = "";
+        
+        try (var pw = new PrintWriter(archivo)) {
+            
+            while(!lista.Vacia()){
+                a = (NodoABB)lista.Retirar().getInfo();
+                jSonString = TransformarJSon(gson, (Reserva)((NodoABB)a).getInfo());
+                EscribirJson(pw, jSonString);
+            }  
+        }catch (Exception e) {
+            return "Error al escribir el archivo";
+        }      
+        JOptionPane.showMessageDialog(null, "Archivo guardado");
+        return "Serialización exitosa!";
+        
+    }
+    
     public String DeserializarEstudiante(String ruta, ArbolBB arbol){
         String stringJson = "";
         String linea;
@@ -65,6 +91,33 @@ public class Serializador {
                     
                     arbol.Ingresar(es);
                    
+                    stringJson = "";
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            return "Error";
+        }
+        return "Deserialización exitosa!";
+    }
+    
+    public String DeserializarReservas(String ruta, ArbolBB arbol){
+        String stringJson = "";
+        String linea;
+        
+        try {
+            FileReader fileReader = new FileReader(ruta);
+            BufferedReader br = new BufferedReader(fileReader);
+            //System.out.println("Archivo encontrado");
+            JOptionPane.showMessageDialog(null, "Archivo Cargado");
+            Reserva r;
+            while ((linea = br.readLine()) != null) {                
+                stringJson += linea;
+                if(linea.compareTo("}") == 0){
+                    r = gson.fromJson(stringJson, Reserva.class);
+                    
+                    arbol.IngresarReserva(r);
+                    
                     stringJson = "";
                 }
             }

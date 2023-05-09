@@ -12,11 +12,13 @@ public class Reserva {
     private Libro libro;
     private int cantidad;
     private String Codigo;
+    private String cedula;
     
-    public Reserva(Libro libro, int cant,String codigo){
+    public Reserva(Libro libro, int cant,String codigof, String cedula){
         this.libro = libro;
         this.cantidad= cant;
-        this.Codigo= codigo;
+        this.Codigo= codigof;
+        this.cedula=cedula;
     }
 
     /**
@@ -39,12 +41,20 @@ public class Reserva {
     public int getCantidad() {
         return cantidad;
     }
+    
+    /**
+     * @return the cedula
+     */
+    public String getCedula() {
+        return cedula;
+    }
 
     /**
      * @param cantidad the cantidad to set
      */
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+        this.libro.setNumeroPrestamos(cantidad);
     }
     
     
